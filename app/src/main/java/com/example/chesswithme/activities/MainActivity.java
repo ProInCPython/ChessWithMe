@@ -1,10 +1,13 @@
-package com.example.chesswithme;
+package com.example.chesswithme.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+import com.example.chesswithme.R;
+
 public class MainActivity extends AppCompatActivity {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

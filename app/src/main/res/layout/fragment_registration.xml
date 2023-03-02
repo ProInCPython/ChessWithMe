@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_background"
+    android:orientation="vertical"
+    android:padding="30dp"
+    tools:context=".fragments.RegistrationFragment">
+
+    <com.example.chesswithme.views.InputField
+        android:id="@+id/reg_input_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"
+        app:title="Email address" />
+
+    <com.example.chesswithme.views.InputField
+        android:id="@+id/reg_input_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        app:title="Password" />
+
+    <com.example.chesswithme.views.InputField
+        android:id="@+id/reg_input_repeat_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        app:title="Repeat Password" />
+
+    <com.example.chesswithme.views.InputField
+        android:id="@+id/reg_input_nickname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        app:title="Username" />
+
+    <com.example.chesswithme.views.EnterButton
+        android:id="@+id/button_enter"
+        android:layout_width="320dp"
+        android:layout_height="100dp"
+        android:text="@string/register"
+        android:layout_gravity="center"/>
+
+</LinearLayout>

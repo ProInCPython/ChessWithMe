@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">ChessWithMe</string>
+    <string name="forgot_password">Forgot password?</string>
+    <string name="enter">Login</string>
+    <string name="register">Register</string>
+    <string name="registration_text">REGISTRATION</string>
 </resources>
