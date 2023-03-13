@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/lessons"
+        android:enabled="true"
+        android:icon="@drawable/success"
+        android:title="@string/lessons"/>
+    <item
+        android:id="@+id/leaderboards"
+        android:enabled="true"
+        android:icon="@drawable/podium"
+        android:title="@string/leaderboards" />
+    <item
+        android:id="@+id/profile"
+        android:enabled="true"
+        android:icon="@drawable/user"
+        android:title="@string/profile"/>
+</menu>

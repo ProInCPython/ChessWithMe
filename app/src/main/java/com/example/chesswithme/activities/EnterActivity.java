@@ -16,16 +16,16 @@ public class EnterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityEnterBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        new Thread(() -> {
-            try {
-                Thread.sleep(1500);
-                runOnUiThread(() -> {
-                    binding.mainIcon.setVisibility(View.VISIBLE);
-                });
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-        }).start();
+//        new Thread(() -> {
+//            try {
+//                Thread.sleep(1500);
+//                runOnUiThread(() -> {
+//                    binding.mainIcon.setVisibility(View.VISIBLE);
+//                });
+//            } catch (InterruptedException e) {
+//                throw new RuntimeException(e);
+//            }
+//        }).start();
         binding.pager.setAdapter(new EnterPagerAdapter(getSupportFragmentManager()));
         binding.tabs.setupWithViewPager(binding.pager);
     }

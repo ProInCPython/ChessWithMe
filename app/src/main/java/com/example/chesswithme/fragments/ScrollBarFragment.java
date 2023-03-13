@@ -9,18 +9,18 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-import com.example.chesswithme.activities.AppActivity;
+import com.example.chesswithme.activities.MainActivity;
 import com.example.chesswithme.databinding.FragmentLoginBinding;
+import com.example.chesswithme.databinding.FragmentScrollBarBinding;
 
-public class LoginFragment extends Fragment {
-    private FragmentLoginBinding binding;
+public class ScrollBarFragment extends Fragment {
+    private FragmentScrollBarBinding binding;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        binding = FragmentLoginBinding.inflate(inflater, container, false);
-        binding.buttonEnter.setOnClickListener(view -> {
-            Intent intent = new Intent(getContext(), AppActivity.class);
-            startActivity(intent);
+        binding = FragmentScrollBarBinding.inflate(inflater, container, false);
+        binding.lessons.setOnClickListener(view -> {
+
         });
         return binding.getRoot();
     }

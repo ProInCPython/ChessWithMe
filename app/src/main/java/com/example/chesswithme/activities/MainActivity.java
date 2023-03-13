@@ -2,9 +2,12 @@ package com.example.chesswithme.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 
 import com.example.chesswithme.R;
+import com.example.chesswithme.fragments.ScrollBarFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -13,5 +16,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
     }
 }

@@ -1,7 +1,10 @@
 <resources>
     <string name="app_name">ChessWithMe</string>
-    <string name="forgot_password">Forgot password?</string>
-    <string name="enter">Login</string>
-    <string name="register">Register</string>
-    <string name="registration_text">REGISTRATION</string>
+    <string name="forgot_password">Забыли пароль?</string>
+    <string name="enter">Войти</string>
+    <string name="register">Регистрация</string>
+    <string name="registration_text">РЕГИСТРАЦИЯ</string>
+    <string name="lessons">Уроки</string>
+    <string name="leaderboards">Рейтинг</string>
+    <string name="profile">Профиль</string>
 </resources>

@@ -4,6 +4,5 @@
 
     <stroke android:color="@color/black" android:width="5dp"/>
     <size android:width="100dp" android:height="100dp"/>
-    <gradient android:startColor="@color/white" android:endColor="@color/white"/>
 
 </shape>
