@@ -1,6 +1,5 @@
 package com.example.chesswithme.adapters;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.chesswithme.R;
 import com.example.chesswithme.views.LeaderboardsItem;
+import com.example.chesswithme.databinding.LeaderboardsItemBinding;
 
 import java.util.List;
 
@@ -26,8 +26,9 @@ public class LeaderboardsAdapter extends RecyclerView.Adapter<LeaderboardsAdapte
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.leaderboards_item, parent, false);
-        return new ViewHolder(view);
+        //View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.leaderboards_item, parent, false);
+        LeaderboardsItemBinding binding = LeaderboardsItemBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
+        return new ViewHolder(binding.getRoot());
     }
 
     @Override
@@ -37,15 +38,24 @@ public class LeaderboardsAdapter extends RecyclerView.Adapter<LeaderboardsAdapte
         holder.username.setText(state.getUsername());
         holder.position.setText(state.getPosition());
         holder.points.setText(state.getPoints());
-        holder.item.setOnClickListener(view -> {
-            //go to person's profile
-        });
+//        holder.item.setOnClickListener(view -> {
+//            //go to person's profile
+//        });
     }
 
     @Override
     public int getItemCount() {
-        return data.size();
+        int a ;
+
+        if(data != null && !data.isEmpty()) {
+            a = data.size();
+        }
+        else {
+            a = 0;
+        }
+        return a;
     }
+
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         final ImageView profile_picture;

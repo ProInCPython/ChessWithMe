@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="LessonButtonStyle2" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/lesson_button_shape</item>
+    </style>
+
+</resources>

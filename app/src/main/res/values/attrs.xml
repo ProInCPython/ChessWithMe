@@ -9,4 +9,9 @@
         <attr name="android:text"/>
         <attr name="android:textAllCaps"/>
     </declare-styleable>
+
+    <declare-styleable name="LessonButtonStyle">
+        <attr name="text" format="integer"/>
+    </declare-styleable>
+
 </resources>

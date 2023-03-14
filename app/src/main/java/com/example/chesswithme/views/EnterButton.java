@@ -14,7 +14,7 @@ import com.example.chesswithme.databinding.EnterButtonBinding;
 
 public class EnterButton extends FrameLayout {
 
-     EnterButtonBinding binding;
+    EnterButtonBinding binding;
 
     public EnterButton(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);

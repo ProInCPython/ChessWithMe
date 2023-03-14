@@ -2,18 +2,58 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/main_background"
     android:id="@+id/lessons_fragment">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="УРОКИ"
-        android:textSize="80sp"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:textColor="@color/black">
+        android:padding="10dp"
+        android:layout_marginBottom="50dp"
+        app:layoutManager="LinearLayoutManager"/>
 
-    </TextView>
+<!--    <com.example.chesswithme.views.LessonButton-->
+<!--        android:id="@+id/lesson_1"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_margin="30dp"-->
+<!--        app:text="1">-->
+
+<!--    </com.example.chesswithme.views.LessonButton>-->
+
+<!--    <com.example.chesswithme.views.LessonButton-->
+<!--        android:id="@+id/lesson_2"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@id/lesson_1"-->
+<!--        android:layout_margin="30dp"-->
+<!--        android:layout_alignParentEnd="true"-->
+<!--        app:text="2">-->
+
+<!--    </com.example.chesswithme.views.LessonButton>-->
+
+<!--    <com.example.chesswithme.views.LessonButton-->
+<!--        android:id="@+id/lesson_3"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@id/lesson_1"-->
+<!--        android:layout_marginTop="100dp"-->
+<!--        android:layout_marginStart="30dp"-->
+<!--        app:text="3">-->
+
+<!--    </com.example.chesswithme.views.LessonButton>-->
+
+<!--    <com.example.chesswithme.views.LessonButton-->
+<!--        android:id="@+id/lesson_4"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@id/lesson_2"-->
+<!--        android:layout_marginTop="100dp"-->
+<!--        android:layout_marginEnd="30dp"-->
+<!--        android:layout_alignParentEnd="true"-->
+<!--        app:text="4">-->
+<!--    </com.example.chesswithme.views.LessonButton>-->
 
 </RelativeLayout>

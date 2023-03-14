@@ -26,7 +26,7 @@
                 android:id="@+id/username"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="ChessPro"
+                android:text="ChessPro"
                 android:textSize="20sp"
                 android:textColor="@color/black">
             </TextView>
@@ -35,7 +35,7 @@
                 android:id="@+id/join_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="Присоединился в марте 2023"
+                android:text="Присоединился в марте 2023"
                 android:textSize="20sp"
                 android:layout_alignTop="@id/username"
                 android:layout_marginTop="50dp"
@@ -88,7 +88,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                tools:text="Статистика"
+                android:text="Статистика"
                 android:textSize="30sp"
                 android:textColor="@color/black"/>
 
@@ -113,15 +113,16 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
-                        tools:text="30"
+                        android:text="30"
                         android:textSize="20sp"
                         android:textColor="@color/black"/>
 
                     <TextView
+                        android:id="@+id/lessons_complete_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
-                        tools:text="Уроков пройдено"
+                        android:text="Уроков пройдено"
                         android:layout_margin="3dp"
                         android:textSize="15sp"
                         android:layout_below="@id/lessons_complete"
@@ -155,15 +156,16 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
-                        tools:text="5468"
+                        android:text="5468"
                         android:textSize="20sp"
                         android:textColor="@color/black"/>
 
                     <TextView
+                        android:id="@+id/points_scored_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
-                        tools:text="Набрано очков"
+                        android:text="Очков набрано"
                         android:layout_margin="3dp"
                         android:textSize="15sp"
                         android:layout_below="@id/points_scored"
@@ -198,15 +200,16 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
-                        tools:text="5"
+                        android:text="5"
                         android:textSize="20sp"
                         android:textColor="@color/black"/>
 
                     <TextView
+                        android:id="@+id/rating_place_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
-                        tools:text="Место в рейтинге"
+                        android:text="Место в рейтинге"
                         android:layout_margin="3dp"
                         android:textSize="15sp"
                         android:layout_below="@id/rating_place"
@@ -218,6 +221,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/top_three_finishes_card"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/points_scored_card"
@@ -239,15 +243,16 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
-                        tools:text="5468"
+                        android:text="6"
                         android:textSize="20sp"
                         android:textColor="@color/black"/>
 
                     <TextView
+                        android:id="@+id/top_three_finishes_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
-                        tools:text="Набрано очков"
+                        android:text="Финишей в топ 3"
                         android:layout_margin="3dp"
                         android:textSize="15sp"
                         android:layout_below="@id/top_three_finishes"
@@ -280,7 +285,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
-                    tools:text="Достижения"
+                    android:text="Достижения"
                     android:textSize="30sp"
                     android:textColor="@color/black"/>
 
@@ -295,6 +300,7 @@
                         android:layout_height="wrap_content">
 
                         <ImageView
+                            android:id="@+id/achievement_image"
                             android:layout_width="100dp"
                             android:layout_height="100dp"
                             android:layout_margin="10dp"
@@ -306,7 +312,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
                             android:layout_marginLeft="150dp"
-                            tools:text="Начинающий шахматист"
+                            android:text="Начинающий шахматист"
                             android:textSize="18sp"
                             android:textColor="@color/black"
                             android:gravity="left|center_vertical"/>
@@ -318,7 +324,7 @@
                             android:layout_below="@id/achievement_name"
                             android:layout_marginTop="10dp"
                             android:layout_marginLeft="170dp"
-                            tools:text="Пройти 1 урок"
+                            android:text="Пройти 1 урок"
                             android:textSize="20sp"
                             android:textColor="@color/black"
                             android:textStyle="bold"
