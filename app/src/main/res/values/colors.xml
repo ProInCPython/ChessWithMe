@@ -7,7 +7,8 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="main_background">#027302</color>
+    <color name="main_background">#D79D6B</color>
+    <color name="text_color">#000000</color>
     <color name="hint_color">#FF1900</color>
     <color name="field_color">#B3B6B5</color>
     <color name="enter_button_start_color">#18A60D</color>
@@ -15,4 +16,5 @@
     <color name='card_color'>#68C6F1</color>
     <color name="lesson_button_start_color">#10FFEB</color>
     <color name="lesson_button_end_color">#0005FF</color>
+    <color name="hint_color2">#E6E3E2</color>
 </resources>
