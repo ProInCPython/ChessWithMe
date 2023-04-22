@@ -1,14 +1,17 @@
 package com.example.chesswithme.adapters;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.chesswithme.R;
+import com.example.chesswithme.activities.LessonActivity;
 import com.example.chesswithme.databinding.LessonItemBinding;
 import com.example.chesswithme.views.LessonButton;
 import com.example.chesswithme.views.LessonItem;
@@ -33,7 +36,14 @@ public class LessonsAdapter extends RecyclerView.Adapter<LessonsAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         final LessonItem state = data.get(position);
-        holder.button.setText(state.getText());
+        holder.symbol.setText(state.getText());
+        holder.button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), LessonActivity.class);
+                holder.button.getContext().startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -51,9 +61,11 @@ public class LessonsAdapter extends RecyclerView.Adapter<LessonsAdapter.ViewHold
 
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        final Button button;
+        final CardView button;
+        final Button symbol;
         ViewHolder(View view){
             super(view);
+            symbol = view.findViewById(R.id.symbol);
             button = view.findViewById(R.id.button);
         }
     }

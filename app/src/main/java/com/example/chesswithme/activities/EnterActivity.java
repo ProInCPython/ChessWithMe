@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.chesswithme.controller.AuthController;
 import com.example.chesswithme.databinding.ActivityEnterBinding;
 
 public class EnterActivity extends AppCompatActivity {
@@ -15,9 +17,15 @@ public class EnterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityEnterBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        AuthController authController = new AuthController();
         binding.startNow.setOnClickListener(view -> {
-            Intent intent = new Intent(this, LoginActivity.class);
-            startActivity(intent);
+            if(authController.isAuth()) {
+                startActivity(new Intent(this, LoginActivity.class));
+                finish();
+            } else {
+                Intent intent = new Intent(this, RegisterActivity.class);
+                startActivity(intent);
+            }
         }
         );
 

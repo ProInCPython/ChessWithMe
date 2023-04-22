@@ -2,10 +2,12 @@ package com.example.chesswithme.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.chesswithme.App;
+import com.example.chesswithme.controller.AuthController;
 import com.example.chesswithme.database.User;
 import com.example.chesswithme.database.room.UserDAO;
 import com.example.chesswithme.database.room.UserEntity;
@@ -21,37 +23,52 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        String password = binding.password.getText().toString();
-        String email = binding.email.getText().toString();
-
-        UserDAO userDAO = App.getDatabase().userDAO();
-
+        AuthController authController = new AuthController();
 
         binding.button.setOnClickListener(view -> {
 
-            new Thread(() -> {
-                UserEntity user = userDAO.getPassword(password.hashCode());
-                runOnUiThread(() -> {
-                    if(user.password == password.hashCode()) {
-                        if (user.email.equals(email)) {
-                            Intent intent = new Intent(this, AppActivity.class);
-                            binding.wrongPassword.setText("");
-                            startActivity(intent);
-                        } else {
-                            binding.wrongPassword.setText("Введён неверный email или пароль!");
-                        }
-                    } else {
-                        binding.wrongPassword.setText("Введён неверный email или пароль!");
-                    }
-                });
+            String email = binding.email.getText().toString();
+            String password = binding.password.getText().toString();
+            authController.signIn(email, password, task -> {
+                if (task.isSuccessful()) {
+                    startActivity(new Intent(this, AppActivity.class));
+                    finish();
+                } else {
+                    Toast.makeText(this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
 
-            }).start();
-        }
-        );
+
+        });
+
+//        UserDAO userDAO = App.getDatabase().userDAO();
+//
+//
+//        binding.button.setOnClickListener(view -> {
+//
+//            new Thread(() -> {
+//                UserEntity user = userDAO.getPassword(password.hashCode());
+//                runOnUiThread(() -> {
+//                    if(user.password == password.hashCode()) {
+//                        if (user.email.equals(email)) {
+//                            Intent intent = new Intent(this, AppActivity.class);
+//                            binding.wrongPassword.setText("");
+//                            startActivity(intent);
+//                        } else {
+//                            binding.wrongPassword.setText("Введён неверный email или пароль!");
+//                        }
+//                    } else {
+//                        binding.wrongPassword.setText("Введён неверный email или пароль!");
+//                    }
+//                });
+//
+//            }).start();
+//        }
+//        );
 
         binding.noAccount.setOnClickListener(view -> {
-                        Intent intent = new Intent(this, RegisterActivity.class);
-                        startActivity(intent);
+                    Intent intent = new Intent(this, RegisterActivity.class);
+                    startActivity(intent);
 
                 }
         );

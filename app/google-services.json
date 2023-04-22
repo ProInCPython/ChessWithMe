@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "630225083716",
+    "project_id": "chesswithme-3bc29",
+    "storage_bucket": "chesswithme-3bc29.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:630225083716:android:1eff97d571c18138e84b11",
+        "android_client_info": {
+          "package_name": "com.example.chesswithme"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "630225083716-hsg8256jao6atcgi008052ge9h6lsotf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBlbLZxWfBSTS2_atwj4ZXzyykrFmu9sg8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "630225083716-hsg8256jao6atcgi008052ge9h6lsotf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

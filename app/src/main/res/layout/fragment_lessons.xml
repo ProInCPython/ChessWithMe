@@ -12,7 +12,9 @@
         android:layout_height="wrap_content"
         android:padding="10dp"
         android:layout_marginBottom="50dp"
-        app:layoutManager="LinearLayoutManager"/>
+        app:layoutManager="LinearLayoutManager">
+
+    </androidx.recyclerview.widget.RecyclerView>
 
 <!--    <com.example.chesswithme.views.LessonButton-->
 <!--        android:id="@+id/lesson_1"-->
