@@ -4,32 +4,36 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.chesswithme.App;
+import com.example.chesswithme.R;
 import com.example.chesswithme.controller.AuthController;
-import com.example.chesswithme.database.room.UserDAO;
-import com.example.chesswithme.database.room.UserEntity;
 import com.example.chesswithme.databinding.ActivityRegisterBinding;
-import com.google.firebase.auth.FirebaseAuthException;
-import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
-import com.google.firebase.auth.FirebaseAuthUserCollisionException;
-import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
+import com.example.chesswithme.firebase.ChessUserInfo;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class RegisterActivity extends AppCompatActivity {
 
     ActivityRegisterBinding binding;
+    DatabaseReference databaseReference;
+
+    ChessUserInfo chessUserInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityRegisterBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        // below line is used to get reference for our database.
+        databaseReference = FirebaseDatabase.getInstance().getReference();
+        chessUserInfo = new ChessUserInfo();
+
+
         AuthController controller = new AuthController();
 
         binding.button.setOnClickListener(view -> {
@@ -40,6 +44,7 @@ public class RegisterActivity extends AppCompatActivity {
             if(password.equals(repeat_password)) {
                 controller.registerUser(email, password, task -> {
                     if (task.isSuccessful()) {
+                        addUserDatatoFirebase("1", "", 0, 0, 0, 0, R.drawable.user);
                         startActivity(new Intent(this, AppActivity.class));
                         finish();
                     } else {
@@ -90,6 +95,36 @@ public class RegisterActivity extends AppCompatActivity {
 
 
 
+    }
+
+    private void addUserDatatoFirebase(String userId, String username, double dailyPoints, double weeklyPoints, double monthlyPoints, double completedLessons, double profilePicture) {
+        // below 3 lines of code is used to set
+        // data in our object class.
+        chessUserInfo.setUsername(username);
+        chessUserInfo.setDailyPoints(dailyPoints);
+        chessUserInfo.setWeeklyPoints(weeklyPoints);
+        chessUserInfo.setCompletedLessons(completedLessons);
+        chessUserInfo.setMonthlyPoints(monthlyPoints);
+        chessUserInfo.setProfilePicture(profilePicture);
+
+        // we are use add value event listener method
+        // which is called with database reference.
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                // inside the method of on Data change we are setting
+                // our object class to our database reference.
+                // data base reference will sends data to firebase.
+                databaseReference.child("usersdata").setValue("test");
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // if the data is not added or it is cancelled then
+                // we are displaying a failure toast message.
+                Toast.makeText(RegisterActivity.this, "Что-то пошло не так... " + error, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
 }

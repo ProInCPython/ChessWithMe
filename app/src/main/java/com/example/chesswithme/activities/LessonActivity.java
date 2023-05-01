@@ -2,6 +2,7 @@ package com.example.chesswithme.activities;
 
 import android.os.Bundle;
 import android.text.Html;
+import android.view.KeyEvent;
 import android.view.View;
 
 import androidx.annotation.Nullable;
@@ -19,6 +20,7 @@ import com.example.chesswithme.fragments.LessonsFragment;
 public class LessonActivity extends AppCompatActivity {
     ActivityLessonBinding binding;
     private BoardView board;
+    String data;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -26,14 +28,29 @@ public class LessonActivity extends AppCompatActivity {
         binding = ActivityLessonBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         board = binding.board;
-        binding.text.setTooltipText("Привет! В этом уроке мы поговорим о том, как ходит ладья. Посмотри на доску." +
-                "Ты видишь ладью?");
+        Board.newGame();
+        binding.button.setOnClickListener(view -> {
+            data = Board.getString();
+            binding.text.setText(data);
+        });
+        binding.button2.setOnClickListener(view -> {
+            if(data != null) {
+                Board.load(data);
+            }
+        });
 
+        binding.text.setText("Привет! В этом уроке мы поговорим о том, как ходит ладья. Посмотри на доску. Ты видишь ладью?");
     }
 
     public void update() {
         if (board == null) return;
         board.invalidate();
+    }
+
+    @Override
+    public void onBackPressed() {
+        update();
+        super.onBackPressed();
     }
 
     public void updateTurn() {

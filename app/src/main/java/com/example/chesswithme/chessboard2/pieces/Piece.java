@@ -51,7 +51,7 @@ public abstract class Piece {
      * @param destination the piece to check against
      * @return true, if both pieces belong to the same team or same player
      */
-    boolean sameTeam(final Coordinate destination) {
+    public boolean sameTeam(final Coordinate destination) {
         Piece p = Board.getPiece(destination);
         return p != null && p.ownerColor.equals(ownerColor);
     }

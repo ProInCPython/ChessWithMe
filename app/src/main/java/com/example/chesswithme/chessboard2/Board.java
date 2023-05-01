@@ -16,7 +16,7 @@ public class Board {
     private Board() {
     }
 
-    private static Piece[][] BOARD = new Piece[8][8];
+    private static Piece[][] BOARD;
 
 //    /**
 //     * Remove all pieces belonging to the given player
@@ -54,6 +54,34 @@ public class Board {
         BOARD[old_pos.x][old_pos.y] = null;
         p.position = new_pos;
         return true;
+    }
+
+    /**
+     * Loads the game board from the given data
+     *
+     * @param data containing information about the state of the game
+     */
+    public static void load(final String data) {
+        String[] pieceData;
+        Coordinate c;
+        BOARD = new Piece[8][8];
+        for (String piece : data.split(";")) {
+            pieceData = piece.split(",");
+            c = new Coordinate(Integer.parseInt(pieceData[0]), Integer.parseInt(pieceData[1]));
+            if (pieceData[3].equals("Bishop")) {
+                BOARD[c.x][c.y] = new Bishop(c, pieceData[2]);
+            } else if (pieceData[3].equals("King")) {
+                BOARD[c.x][c.y] = new King(c, pieceData[2]);
+            } else if (pieceData[3].equals("Knight")) {
+                BOARD[c.x][c.y] = new Knight(c, pieceData[2]);
+            } else if (pieceData[3].equals("Pawn")) {
+                BOARD[c.x][c.y] = new Pawn(c, pieceData[2]);
+            } else if (pieceData[3].equals("Queen")) {
+                BOARD[c.x][c.y] = new Queen(c, pieceData[2]);
+            } else if (pieceData[3].equals("Rook")) {
+                BOARD[c.x][c.y] = new Rook(c, pieceData[2]);
+            }
+        }
     }
 
     /**
@@ -99,8 +127,8 @@ public class Board {
         BOARD[x_begin][y_others] = new Rook(new Coordinate(x_begin, y_others), owner);
         BOARD[x_begin + 1][y_others] = new Knight(new Coordinate(x_begin + 1, y_others), owner);
         BOARD[x_begin + 2][y_others] = new Bishop(new Coordinate(x_begin + 2, y_others), owner);
-        BOARD[x_begin + 3][y_others] = new King(new Coordinate(x_begin + 4, y_others), owner);
-        BOARD[x_begin + 4][y_others] = new Queen(new Coordinate(x_begin + 3, y_others), owner);
+        BOARD[x_begin + 3][y_others] = new King(new Coordinate(x_begin + 3, y_others), owner);
+        BOARD[x_begin + 4][y_others] = new Queen(new Coordinate(x_begin + 4, y_others), owner);
         BOARD[x_begin + 5][y_others] = new Bishop(new Coordinate(x_begin + 5, y_others), owner);
         BOARD[x_begin + 6][y_others] = new Knight(new Coordinate(x_begin + 6, y_others), owner);
         BOARD[x_begin + 7][y_others] = new Rook(new Coordinate(x_begin + 7, y_others), owner);
@@ -110,6 +138,7 @@ public class Board {
      * Initialize a new game
      */
     public static void newGame() {
+        BOARD = new Piece[8][8];
         // setup player 1 (bottom)
         setupPlayerTopBottom(0, 1, 0, "white");
         // setup player 2 (top)

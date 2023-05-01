@@ -21,18 +21,21 @@ import com.example.chesswithme.chessboard2.pieces.Piece;
 import com.example.chesswithme.chessboard2.pieces.Queen;
 import com.example.chesswithme.chessboard2.pieces.Rook;
 
+import java.util.Objects;
+
 public class BoardView extends View {
 
     private Coordinate selection;
     private final Paint boardPaint = new Paint();
     private final Paint textPaint = new Paint();
+    public String userColor;
     Piece p;
 
     public BoardView(final Context context, final AttributeSet attrs) {
         super(context, attrs);
-        Board.newGame();
         Typeface bold = Typeface.DEFAULT_BOLD;
         textPaint.setTypeface(bold);
+        userColor = "white";
     }
 
     @Override
@@ -42,15 +45,19 @@ public class BoardView extends View {
             int x = (int) (event.getX() / getWidth() * max);
             int y = max - 1 - (int) (event.getY() / getWidth() * max);
             Coordinate c = new Coordinate(x, y);
-            if (c.isValid() && Board.getPiece(c) != null) {
+            Piece piece = Board.getPiece(c);
+            if (c.isValid() && piece != null && Objects.equals(piece.getPlayerColor(), userColor)) {
                 selection = c;
                 invalidate();
             } else {
                 if (selection != null) { // we have a piece selected and clicked on a new position
-                    if (Board.move(selection, c)) {
-                        selection = null;
-                        invalidate();
+                    if (!Board.getPiece(selection).sameTeam(c)) {
+                        if (Board.move(selection, c)) {
+                            selection = null;
+                            invalidate();
+                        }
                     }
+
                 }
             }
         }
@@ -78,63 +85,63 @@ public class BoardView extends View {
                         if (p.getClass().equals(Bishop.class)) {
                             if (p.getPlayerColor().equals("white")) {
                                 canvas.drawBitmap(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getContext().getResources(),
-                                        R.drawable.bishop_white), (int)cellWidth, (int)cellWidth, true), c.x * cellWidth, (max - c.y - 1) * cellWidth, null);
+                                        R.drawable.bishop_white), (int) cellWidth, (int) cellWidth, true), c.x * cellWidth, (max - c.y - 1) * cellWidth, null);
                             } else {
                                 canvas.drawBitmap(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getContext().getResources(),
-                                                R.drawable.bishop_black), (int)cellWidth, (int)cellWidth, true), c.x * cellWidth, (max - c.y - 1) * cellWidth, null);
+                                        R.drawable.bishop_black), (int) cellWidth, (int) cellWidth, true), c.x * cellWidth, (max - c.y - 1) * cellWidth, null);
                             }
 
                         } else if (p.getClass().equals(King.class)) {
                             if (p.getPlayerColor().equals("white")) {
                                 canvas.drawBitmap(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getContext().getResources(),
-                                        R.drawable.king_white), (int)cellWidth, (int)cellWidth, true), c.x * cellWidth, (max - c.y - 1) * cellWidth, null);
+                                        R.drawable.king_white), (int) cellWidth, (int) cellWidth, true), c.x * cellWidth, (max - c.y - 1) * cellWidth, null);
                             } else {
                                 canvas.drawBitmap(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getContext().getResources(),
-                                        R.drawable.king_black), (int)cellWidth, (int)cellWidth, true),
+                                                R.drawable.king_black), (int) cellWidth, (int) cellWidth, true),
                                         c.x * cellWidth, (max - c.y - 1) * cellWidth, null);
                             }
 
                         } else if (p.getClass().equals(Knight.class)) {
                             if (p.getPlayerColor().equals("white")) {
                                 canvas.drawBitmap(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getContext().getResources(),
-                                                R.drawable.knight_white), (int)cellWidth, (int)cellWidth, true),
+                                                R.drawable.knight_white), (int) cellWidth, (int) cellWidth, true),
                                         c.x * cellWidth, (max - c.y - 1) * cellWidth, null);
                             } else {
                                 canvas.drawBitmap(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getContext().getResources(),
-                                                R.drawable.knight_black), (int)cellWidth, (int)cellWidth, true),
+                                                R.drawable.knight_black), (int) cellWidth, (int) cellWidth, true),
                                         c.x * cellWidth, (max - c.y - 1) * cellWidth, null);
                             }
 
                         } else if (p.getClass().equals(Pawn.class)) {
                             if (p.getPlayerColor().equals("white")) {
                                 canvas.drawBitmap(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getContext().getResources(),
-                                                R.drawable.pawn_white), (int)cellWidth, (int)cellWidth, true),
+                                                R.drawable.pawn_white), (int) cellWidth, (int) cellWidth, true),
                                         c.x * cellWidth, (max - c.y - 1) * cellWidth, null);
                             } else {
                                 canvas.drawBitmap(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getContext().getResources(),
-                                                R.drawable.pawn_black), (int)cellWidth, (int)cellWidth, true),
+                                                R.drawable.pawn_black), (int) cellWidth, (int) cellWidth, true),
                                         c.x * cellWidth, (max - c.y - 1) * cellWidth, null);
                             }
 
                         } else if (p.getClass().equals(Queen.class)) {
                             if (p.getPlayerColor().equals("white")) {
                                 canvas.drawBitmap(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getContext().getResources(),
-                                                R.drawable.queen_white), (int)cellWidth, (int)cellWidth, true),
+                                                R.drawable.queen_white), (int) cellWidth, (int) cellWidth, true),
                                         c.x * cellWidth, (max - c.y - 1) * cellWidth, null);
                             } else {
                                 canvas.drawBitmap(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getContext().getResources(),
-                                                R.drawable.queen_black), (int)cellWidth, (int)cellWidth, true),
+                                                R.drawable.queen_black), (int) cellWidth, (int) cellWidth, true),
                                         c.x * cellWidth, (max - c.y - 1) * cellWidth, null);
                             }
 
                         } else if (p.getClass().equals(Rook.class)) {
                             if (p.getPlayerColor().equals("white")) {
                                 canvas.drawBitmap(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getContext().getResources(),
-                                                R.drawable.rook_white), (int)cellWidth, (int)cellWidth, true),
+                                                R.drawable.rook_white), (int) cellWidth, (int) cellWidth, true),
                                         c.x * cellWidth, (max - c.y - 1) * cellWidth, null);
                             } else {
                                 canvas.drawBitmap(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getContext().getResources(),
-                                                R.drawable.rook_black), (int)cellWidth, (int)cellWidth, true),
+                                                R.drawable.rook_black), (int) cellWidth, (int) cellWidth, true),
                                         c.x * cellWidth, (max - c.y - 1) * cellWidth, null);
                             }
 
