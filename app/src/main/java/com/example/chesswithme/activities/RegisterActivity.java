@@ -7,6 +7,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.chesswithme.App;
 import com.example.chesswithme.R;
 import com.example.chesswithme.controller.AuthController;
 import com.example.chesswithme.databinding.ActivityRegisterBinding;
@@ -29,9 +30,8 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityRegisterBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        // below line is used to get reference for our database.
-        databaseReference = FirebaseDatabase.getInstance().getReference();
-        chessUserInfo = new ChessUserInfo();
+
+        databaseReference = App.getDatabaseReference("Users");
 
 
         AuthController controller = new AuthController();
@@ -41,10 +41,11 @@ public class RegisterActivity extends AppCompatActivity {
                 String email = binding.email.getText().toString();
                 String password = binding.password.getText().toString();
                 String repeat_password = binding.repeatPassword.getText().toString();
+
             if(password.equals(repeat_password)) {
                 controller.registerUser(email, password, task -> {
                     if (task.isSuccessful()) {
-                        addUserDatatoFirebase("1", "", 0, 0, 0, 0, R.drawable.user);
+                        addUserDatatoFirebase();
                         startActivity(new Intent(this, AppActivity.class));
                         finish();
                     } else {
@@ -58,6 +59,11 @@ public class RegisterActivity extends AppCompatActivity {
 
 
         });
+
+        binding.alreadyHave.setOnClickListener(view -> {
+            startActivity(new Intent(this, LoginActivity.class));
+        });
+
 
 //        UserDAO userDAO = App.getDatabase().userDAO();
 
@@ -96,35 +102,35 @@ public class RegisterActivity extends AppCompatActivity {
 
 
     }
-
-    private void addUserDatatoFirebase(String userId, String username, double dailyPoints, double weeklyPoints, double monthlyPoints, double completedLessons, double profilePicture) {
-        // below 3 lines of code is used to set
-        // data in our object class.
-        chessUserInfo.setUsername(username);
-        chessUserInfo.setDailyPoints(dailyPoints);
-        chessUserInfo.setWeeklyPoints(weeklyPoints);
-        chessUserInfo.setCompletedLessons(completedLessons);
-        chessUserInfo.setMonthlyPoints(monthlyPoints);
-        chessUserInfo.setProfilePicture(profilePicture);
-
+//String userId, String username, double dailyPoints, double weeklyPoints, double monthlyPoints, double completedLessons, double profilePicture
+    private void addUserDatatoFirebase() {
+//        chessUserInfo.setUsername(username);
+//        chessUserInfo.setDailyPoints(dailyPoints);
+//        chessUserInfo.setWeeklyPoints(weeklyPoints);
+//        chessUserInfo.setCompletedLessons(completedLessons);
+//        chessUserInfo.setMonthlyPoints(monthlyPoints);
+//        chessUserInfo.setProfilePicture(profilePicture);
+        chessUserInfo = new ChessUserInfo("ChessPlayer", 0, 0, 0, 0, R.drawable.user);
+        databaseReference.push().setValue(chessUserInfo);
         // we are use add value event listener method
         // which is called with database reference.
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                // inside the method of on Data change we are setting
-                // our object class to our database reference.
-                // data base reference will sends data to firebase.
-                databaseReference.child("usersdata").setValue("test");
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                // if the data is not added or it is cancelled then
-                // we are displaying a failure toast message.
-                Toast.makeText(RegisterActivity.this, "Что-то пошло не так... " + error, Toast.LENGTH_SHORT).show();
-            }
-        });
+//        databaseReference.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                // inside the method of on Data change we are setting
+//                // our object class to our database reference.
+//                // data base reference will sends data to firebase.
+//                //mDatabase.child("users").child(userId).setValue(user);
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//                // if the data is not added or it is cancelled then
+//                // we are displaying a failure toast message.
+//                Toast.makeText(RegisterActivity.this, "Что-то пошло не так... " + error, Toast.LENGTH_SHORT).show();
+//            }
+//        });
     }
 
 }

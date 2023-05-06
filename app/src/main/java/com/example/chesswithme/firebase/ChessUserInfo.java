@@ -8,8 +8,13 @@ public class ChessUserInfo {
     private double completedLessons;
     private double profilePicture;
 
-    public ChessUserInfo() {
-
+    public ChessUserInfo(String username, double dailyPoints, double weeklyPoints, double monthlyPoints, double completedLessons, double profilePicture) {
+        this.username = username;
+        this.dailyPoints = dailyPoints;
+        this.weeklyPoints = weeklyPoints;
+        this.monthlyPoints = monthlyPoints;
+        this.completedLessons = completedLessons;
+        this.profilePicture = profilePicture;
     }
 
     public String getUsername() {

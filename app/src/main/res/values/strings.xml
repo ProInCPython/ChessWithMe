@@ -16,4 +16,5 @@
     <string name="email_text">Email</string>
     <string name="no_account">Ещё нет аккаунта? Создайте его!</string>
     <string name="repeat_password_text">Повторите пароль</string>
+    <string name="already_have_account">Уже зарегистрированы? Войдите в аккаунт.</string>
 </resources>
