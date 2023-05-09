@@ -25,6 +25,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     ChessUserInfo chessUserInfo;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,7 +46,7 @@ public class RegisterActivity extends AppCompatActivity {
             if(password.equals(repeat_password)) {
                 controller.registerUser(email, password, task -> {
                     if (task.isSuccessful()) {
-                        addUserDatatoFirebase();
+                        addUserDatatoFirebase("1", "ChessPlayer", 0, 0, 0, 0, R.drawable.user);
                         startActivity(new Intent(this, AppActivity.class));
                         finish();
                     } else {
@@ -102,16 +103,22 @@ public class RegisterActivity extends AppCompatActivity {
 
 
     }
-//String userId, String username, double dailyPoints, double weeklyPoints, double monthlyPoints, double completedLessons, double profilePicture
-    private void addUserDatatoFirebase() {
-//        chessUserInfo.setUsername(username);
-//        chessUserInfo.setDailyPoints(dailyPoints);
-//        chessUserInfo.setWeeklyPoints(weeklyPoints);
-//        chessUserInfo.setCompletedLessons(completedLessons);
-//        chessUserInfo.setMonthlyPoints(monthlyPoints);
-//        chessUserInfo.setProfilePicture(profilePicture);
-        chessUserInfo = new ChessUserInfo("ChessPlayer", 0, 0, 0, 0, R.drawable.user);
+
+    private void addUserDatatoFirebase(String userId, String username, double dailyPoints, double weeklyPoints, double monthlyPoints, double completedLessons, double profilePicture) {
+        chessUserInfo = new ChessUserInfo();
+        chessUserInfo.setUsername(username);
+        chessUserInfo.setDailyPoints(dailyPoints);
+        chessUserInfo.setWeeklyPoints(weeklyPoints);
+        chessUserInfo.setCompletedLessons(completedLessons);
+        chessUserInfo.setMonthlyPoints(monthlyPoints);
+        chessUserInfo.setProfilePicture(profilePicture);
+
+        String key = databaseReference.push().getKey();
+
+        databaseReference.child(key).setValue(userId);
+
         databaseReference.push().setValue(chessUserInfo);
+
         // we are use add value event listener method
         // which is called with database reference.
 //        databaseReference.addValueEventListener(new ValueEventListener() {

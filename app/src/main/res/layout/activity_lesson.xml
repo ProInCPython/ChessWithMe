@@ -16,22 +16,23 @@
 
     <!--    40dp в MargintTop-->
 
-<!--    <ScrollView-->
-<!--        android:layout_marginStart="40dp"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_below="@id/board"-->
-<!--        android:layout_marginTop="70dp"-->
-<!--        android:layout_height="wrap_content">-->
+    <ScrollView
+        android:id="@+id/scroll_text"
+        android:background="@color/black"
+        android:layout_margin="15dp"
+        android:layout_width="match_parent"
+        android:layout_below="@id/board"
+        android:layout_height="match_parent">
 
-<!--        <TextView-->
-<!--            android:id="@+id/text"-->
-<!--            tools:text="Примерное описание урока"-->
-<!--            android:textSize="17sp"-->
-<!--            android:textColor="@color/white"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"/>-->
+        <TextView
+            android:id="@+id/text"
+            tools:text="Примерное описание урока"
+            android:textSize="17sp"
+            android:textColor="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
 
-<!--    </ScrollView>-->
+    </ScrollView>
 
     <Button
         android:id="@+id/button"
@@ -74,6 +75,20 @@
         android:textAlignment="center"
         android:textSize="17sp" />
 
+    <Button
+        android:id="@+id/new_game"
+        android:layout_width="60dp"
+        android:layout_height="50dp"
+        android:layout_below="@id/board"
+        android:layout_toEndOf="@id/send"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/hint_color"
+        android:text="NEW"
+        android:textColor="@color/black"
+        android:textAlignment="center"
+        android:textSize="17sp" />
+
     <EditText
         android:id="@+id/module_number"
         android:hint="MODULE NUMBER"
@@ -85,7 +100,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/send"
         android:layout_marginTop="10dp"
-        android:layout_marginStart="190dp"/>
+        android:layout_marginStart="240dp"/>
 
     <EditText
         android:id="@+id/lesson_name"
@@ -98,7 +113,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/module_number"
         android:layout_marginTop="5dp"
-        android:layout_marginStart="190dp"/>
+        android:layout_marginStart="240dp"/>
 
     <EditText
         android:id="@+id/challenge_number"
@@ -111,7 +126,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/lesson_name"
         android:layout_marginTop="5dp"
-        android:layout_marginStart="190dp"/>
+        android:layout_marginStart="240dp"/>
 
     <EditText
         android:id="@+id/user_color"
@@ -124,6 +139,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/challenge_number"
         android:layout_marginTop="5dp"
-        android:layout_marginStart="190dp"/>
+        android:layout_marginStart="240dp"/>
 
 </RelativeLayout>

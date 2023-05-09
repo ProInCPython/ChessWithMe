@@ -28,14 +28,13 @@ public class BoardView extends View {
     private Coordinate selection;
     private final Paint boardPaint = new Paint();
     private final Paint textPaint = new Paint();
-    public String userColor;
+    public static String userColor;
     Piece p;
 
     public BoardView(final Context context, final AttributeSet attrs) {
         super(context, attrs);
         Typeface bold = Typeface.DEFAULT_BOLD;
         textPaint.setTypeface(bold);
-        userColor = "white";
     }
 
     @Override

@@ -17,21 +17,7 @@ public class Board {
     }
 
     private static Piece[][] BOARD;
-
-//    /**
-//     * Remove all pieces belonging to the given player
-//     *
-//     * @param playerId the player id who's pieces should be removed
-//     */
-//    public static void removePlayer(final String playerId) {
-//        for (int x = 0; x < (extendedBoard ? 12 : 8); x++) {
-//            for (int y = 0; y < (extendedBoard ? 12 : 8); y++) {
-//                if (BOARD[x][y] != null && playerId.equals(BOARD[x][y].getPlayerId())) {
-//                    BOARD[x][y] = null;
-//                }
-//            }
-//        }
-//    }
+    public static String userColor = "white";
 
     /**
      * Move a piece
@@ -53,6 +39,9 @@ public class Board {
         BOARD[new_pos.x][new_pos.y] = BOARD[old_pos.x][old_pos.y];
         BOARD[old_pos.x][old_pos.y] = null;
         p.position = new_pos;
+        userColor = userColor.equals("white") ? "black" : "white";
+        BoardView.userColor = userColor;
+        flip();
         return true;
     }
 
@@ -61,27 +50,52 @@ public class Board {
      *
      * @param data containing information about the state of the game
      */
-    public static void load(final String data) {
-        String[] pieceData;
-        Coordinate c;
-        BOARD = new Piece[8][8];
-        for (String piece : data.split(";")) {
-            pieceData = piece.split(",");
-            c = new Coordinate(Integer.parseInt(pieceData[0]), Integer.parseInt(pieceData[1]));
-            if (pieceData[3].equals("Bishop")) {
-                BOARD[c.x][c.y] = new Bishop(c, pieceData[2]);
-            } else if (pieceData[3].equals("King")) {
-                BOARD[c.x][c.y] = new King(c, pieceData[2]);
-            } else if (pieceData[3].equals("Knight")) {
-                BOARD[c.x][c.y] = new Knight(c, pieceData[2]);
-            } else if (pieceData[3].equals("Pawn")) {
-                BOARD[c.x][c.y] = new Pawn(c, pieceData[2]);
-            } else if (pieceData[3].equals("Queen")) {
-                BOARD[c.x][c.y] = new Queen(c, pieceData[2]);
-            } else if (pieceData[3].equals("Rook")) {
-                BOARD[c.x][c.y] = new Rook(c, pieceData[2]);
+    public static void load(final String data, String user) {
+        userColor = user;
+        if (userColor.equals("white")) {
+            String[] pieceData;
+            Coordinate c;
+            BOARD = new Piece[8][8];
+            for (String piece : data.split(";")) {
+                pieceData = piece.split(",");
+                c = new Coordinate(Integer.parseInt(pieceData[0]), Integer.parseInt(pieceData[1]));
+                if (pieceData[3].equals("Bishop")) {
+                    BOARD[c.x][c.y] = new Bishop(c, pieceData[2]);
+                } else if (pieceData[3].equals("King")) {
+                    BOARD[c.x][c.y] = new King(c, pieceData[2]);
+                } else if (pieceData[3].equals("Knight")) {
+                    BOARD[c.x][c.y] = new Knight(c, pieceData[2]);
+                } else if (pieceData[3].equals("Pawn")) {
+                    BOARD[c.x][c.y] = new Pawn(c, pieceData[2]);
+                } else if (pieceData[3].equals("Queen")) {
+                    BOARD[c.x][c.y] = new Queen(c, pieceData[2]);
+                } else if (pieceData[3].equals("Rook")) {
+                    BOARD[c.x][c.y] = new Rook(c, pieceData[2]);
+                }
+            }
+        } else if(userColor.equals("black")){
+            String[] pieceData;
+            Coordinate c;
+            BOARD = new Piece[8][8];
+            for (String piece : data.split(";")) {
+                pieceData = piece.split(",");
+                c = new Coordinate(7 - Integer.parseInt(pieceData[0]), 7 - Integer.parseInt(pieceData[1]));
+                if (pieceData[3].equals("Bishop")) {
+                    BOARD[c.x][c.y] = new Bishop(c, pieceData[2]);
+                } else if (pieceData[3].equals("King")) {
+                    BOARD[c.x][c.y] = new King(c, pieceData[2]);
+                } else if (pieceData[3].equals("Knight")) {
+                    BOARD[c.x][c.y] = new Knight(c, pieceData[2]);
+                } else if (pieceData[3].equals("Pawn")) {
+                    BOARD[c.x][c.y] = new Pawn(c, pieceData[2]);
+                } else if (pieceData[3].equals("Queen")) {
+                    BOARD[c.x][c.y] = new Queen(c, pieceData[2]);
+                } else if (pieceData[3].equals("Rook")) {
+                    BOARD[c.x][c.y] = new Rook(c, pieceData[2]);
+                }
             }
         }
+
     }
 
     /**
@@ -143,6 +157,54 @@ public class Board {
         setupPlayerTopBottom(0, 1, 0, "white");
         // setup player 2 (top)
         setupPlayerTopBottom(0, 6, 7, "black");
+    }
+
+    public static boolean isFinishCondition(String finish_condition) {
+        switch (finish_condition) {
+            case "Queen on the board":
+                for (int x = 0; x < 8; x++) {
+                    for (int y = 0; y < 8; y++) {
+                        if (BOARD[x][y].getClass().equals(Queen.class)) {
+                            return true;
+                        }
+                    }
+                }
+                return false;
+
+            case "Pawn promotion":
+                for (int x = 0; x < 8; x++) {
+                    if (BOARD[x][7].getClass().equals(Pawn.class)) {
+                        return true;
+                    }
+                }
+                return false;
+            default:
+                return false;
+        }
+    }
+
+    public static void flip() {
+        String data = getString();
+        String[] pieceData;
+        Coordinate c;
+        BOARD = new Piece[8][8];
+        for (String piece : data.split(";")) {
+            pieceData = piece.split(",");
+            c = new Coordinate(7 - Integer.parseInt(pieceData[0]), 7 - Integer.parseInt(pieceData[1]));
+            if (pieceData[3].equals("Bishop")) {
+                BOARD[c.x][c.y] = new Bishop(c, pieceData[2]);
+            } else if (pieceData[3].equals("King")) {
+                BOARD[c.x][c.y] = new King(c, pieceData[2]);
+            } else if (pieceData[3].equals("Knight")) {
+                BOARD[c.x][c.y] = new Knight(c, pieceData[2]);
+            } else if (pieceData[3].equals("Pawn")) {
+                BOARD[c.x][c.y] = new Pawn(c, pieceData[2]);
+            } else if (pieceData[3].equals("Queen")) {
+                BOARD[c.x][c.y] = new Queen(c, pieceData[2]);
+            } else if (pieceData[3].equals("Rook")) {
+                BOARD[c.x][c.y] = new Rook(c, pieceData[2]);
+            }
+        }
     }
 
 }
