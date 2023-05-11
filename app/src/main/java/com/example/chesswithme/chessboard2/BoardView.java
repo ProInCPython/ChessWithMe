@@ -1,5 +1,7 @@
 package com.example.chesswithme.chessboard2;
 
+import static com.example.chesswithme.firebase.FirebaseReceiver.board;
+
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -20,6 +22,7 @@ import com.example.chesswithme.chessboard2.pieces.Pawn;
 import com.example.chesswithme.chessboard2.pieces.Piece;
 import com.example.chesswithme.chessboard2.pieces.Queen;
 import com.example.chesswithme.chessboard2.pieces.Rook;
+import com.example.chesswithme.firebase.FirebaseReceiver;
 
 import java.util.Objects;
 
@@ -39,24 +42,26 @@ public class BoardView extends View {
 
     @Override
     public boolean onTouchEvent(final MotionEvent event) {
-        if (event.getAction() == MotionEvent.ACTION_UP) {
-            int max = 8;
-            int x = (int) (event.getX() / getWidth() * max);
-            int y = max - 1 - (int) (event.getY() / getWidth() * max);
-            Coordinate c = new Coordinate(x, y);
-            Piece piece = Board.getPiece(c);
-            if (c.isValid() && piece != null && Objects.equals(piece.getPlayerColor(), userColor)) {
-                selection = c;
-                invalidate();
-            } else {
-                if (selection != null) { // we have a piece selected and clicked on a new position
-                    if (!Board.getPiece(selection).sameTeam(c)) {
-                        if (Board.move(selection, c)) {
-                            selection = null;
-                            invalidate();
+        if(Board.mode.equals("challenge")) {
+            if (event.getAction() == MotionEvent.ACTION_UP) {
+                int max = 8;
+                int x = (int) (event.getX() / getWidth() * max);
+                int y = max - 1 - (int) (event.getY() / getWidth() * max);
+                Coordinate c = new Coordinate(x, y);
+                Piece piece = Board.getPiece(c);
+                if (c.isValid() && piece != null && Objects.equals(piece.getPlayerColor(), userColor)) {
+                    selection = c;
+                    invalidate();
+                } else {
+                    if (selection != null) { // we have a piece selected and clicked on a new position
+                        if (!Board.getPiece(selection).sameTeam(c)) {
+                            if (board.move(selection, c)) {
+                                selection = null;
+                                invalidate();
+                            }
                         }
-                    }
 
+                    }
                 }
             }
         }

@@ -2,6 +2,7 @@ package com.example.chesswithme.chessboard2;
 
 import android.util.Pair;
 
+import com.example.chesswithme.activities.LessonActivity;
 import com.example.chesswithme.chessboard2.pieces.Bishop;
 import com.example.chesswithme.chessboard2.pieces.King;
 import com.example.chesswithme.chessboard2.pieces.Knight;
@@ -10,14 +11,19 @@ import com.example.chesswithme.chessboard2.pieces.Pawn;
 import com.example.chesswithme.chessboard2.pieces.Piece;
 import com.example.chesswithme.chessboard2.pieces.Queen;
 import com.example.chesswithme.chessboard2.pieces.Rook;
+import com.example.chesswithme.firebase.FirebaseReceiver;
 
 public class Board {
 
-    private Board() {
+    public Board() {
     }
 
     private static Piece[][] BOARD;
     public static String userColor = "white";
+    public boolean isNextChallenge;
+    public static String mode;
+    public static FirebaseReceiver firebaseReceiver = new FirebaseReceiver();
+
 
     /**
      * Move a piece
@@ -26,7 +32,7 @@ public class Board {
      * @param new_pos new position
      * @return false, if that move is not legal
      */
-    public static boolean move(final Coordinate old_pos, final Coordinate new_pos) {
+    public boolean move(final Coordinate old_pos, final Coordinate new_pos) {
 
         if (!new_pos.isValid()) return false; // not a valid new position
 
@@ -39,9 +45,13 @@ public class Board {
         BOARD[new_pos.x][new_pos.y] = BOARD[old_pos.x][old_pos.y];
         BOARD[old_pos.x][old_pos.y] = null;
         p.position = new_pos;
-        userColor = userColor.equals("white") ? "black" : "white";
-        BoardView.userColor = userColor;
-        flip();
+        isNextChallenge = isFinishCondition(firebaseReceiver.getFinish_conditions());
+        if(isNextChallenge) {
+            firebaseReceiver.nextChallenge();
+        }
+//        userColor = userColor.equals("white") ? "black" : "white";
+//        BoardView.userColor = userColor;
+//        flip();
         return true;
     }
 
@@ -50,7 +60,8 @@ public class Board {
      *
      * @param data containing information about the state of the game
      */
-    public static void load(final String data, String user) {
+    public void load(final String data, String user, String mode) {
+        Board.mode = mode;
         userColor = user;
         if (userColor.equals("white")) {
             String[] pieceData;
@@ -59,18 +70,25 @@ public class Board {
             for (String piece : data.split(";")) {
                 pieceData = piece.split(",");
                 c = new Coordinate(Integer.parseInt(pieceData[0]), Integer.parseInt(pieceData[1]));
-                if (pieceData[3].equals("Bishop")) {
-                    BOARD[c.x][c.y] = new Bishop(c, pieceData[2]);
-                } else if (pieceData[3].equals("King")) {
-                    BOARD[c.x][c.y] = new King(c, pieceData[2]);
-                } else if (pieceData[3].equals("Knight")) {
-                    BOARD[c.x][c.y] = new Knight(c, pieceData[2]);
-                } else if (pieceData[3].equals("Pawn")) {
-                    BOARD[c.x][c.y] = new Pawn(c, pieceData[2]);
-                } else if (pieceData[3].equals("Queen")) {
-                    BOARD[c.x][c.y] = new Queen(c, pieceData[2]);
-                } else if (pieceData[3].equals("Rook")) {
-                    BOARD[c.x][c.y] = new Rook(c, pieceData[2]);
+                switch (pieceData[3]) {
+                    case "Bishop":
+                        BOARD[c.x][c.y] = new Bishop(c, pieceData[2]);
+                        break;
+                    case "King":
+                        BOARD[c.x][c.y] = new King(c, pieceData[2]);
+                        break;
+                    case "Knight":
+                        BOARD[c.x][c.y] = new Knight(c, pieceData[2]);
+                        break;
+                    case "Pawn":
+                        BOARD[c.x][c.y] = new Pawn(c, pieceData[2]);
+                        break;
+                    case "Queen":
+                        BOARD[c.x][c.y] = new Queen(c, pieceData[2]);
+                        break;
+                    case "Rook":
+                        BOARD[c.x][c.y] = new Rook(c, pieceData[2]);
+                        break;
                 }
             }
         } else if(userColor.equals("black")){
@@ -163,17 +181,15 @@ public class Board {
         switch (finish_condition) {
             case "Queen on the board":
                 for (int x = 0; x < 8; x++) {
-                    for (int y = 0; y < 8; y++) {
-                        if (BOARD[x][y].getClass().equals(Queen.class)) {
-                            return true;
-                        }
+                    if (BOARD[x][7] != null && BOARD[x][7].getClass().equals(Queen.class) && BOARD[x][7].getPlayerColor().equals(userColor)) {
+                        return true;
                     }
                 }
                 return false;
 
             case "Pawn promotion":
                 for (int x = 0; x < 8; x++) {
-                    if (BOARD[x][7].getClass().equals(Pawn.class)) {
+                    if (BOARD[x][7] != null && BOARD[x][7].getClass().equals(Pawn.class) && BOARD[x][7].getPlayerColor().equals(userColor)) {
                         return true;
                     }
                 }
@@ -206,5 +222,4 @@ public class Board {
             }
         }
     }
-
 }

@@ -20,8 +20,8 @@ public class App extends Application {
         super.onCreate();
     }
 
-    public static DatabaseReference getDatabaseReference(String path) {
-        return databaseReference.child(path);
+    public static DatabaseReference getDatabaseReference() {
+        return databaseReference;
     }
 
     public static FirebaseDatabase getDatabase() {

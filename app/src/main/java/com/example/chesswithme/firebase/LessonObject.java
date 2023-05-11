@@ -1,8 +1,6 @@
 package com.example.chesswithme.firebase;
 
 
-import java.util.ArrayList;
-
 public class LessonObject {
     private String finish_conditions;
     private String initial_position;

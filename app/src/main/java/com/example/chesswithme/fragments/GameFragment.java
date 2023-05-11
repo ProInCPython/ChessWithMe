@@ -24,8 +24,8 @@ public class GameFragment extends Fragment {
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
-        currentMatch = getArguments().getString("matchID");
+//        setHasOptionsMenu(true);
+//        currentMatch = getArguments().getString("matchID");
     }
 
     @Override

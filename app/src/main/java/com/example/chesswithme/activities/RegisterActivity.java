@@ -32,7 +32,7 @@ public class RegisterActivity extends AppCompatActivity {
         binding = ActivityRegisterBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        databaseReference = App.getDatabaseReference("Users");
+        databaseReference = App.getDatabaseReference().child("Users");
 
 
         AuthController controller = new AuthController();

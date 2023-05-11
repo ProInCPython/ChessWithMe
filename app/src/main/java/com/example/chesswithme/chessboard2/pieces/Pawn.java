@@ -11,6 +11,8 @@ public class Pawn extends Piece {
         super(p, o);
     }
 
+
+
     @Override
     public List<Coordinate> getPossiblePositions() {
         List<Coordinate> re = new LinkedList<Coordinate>();
