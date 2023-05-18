@@ -12,8 +12,12 @@
         android:layout_alignParentBottom="true"
         app:menu="@menu/scroll_bar_menu"
         app:itemBackground="@android:color/transparent"
+        app:itemActiveIndicatorStyle="@style/ShapeAppearance.Material3.Corner.ExtraLarge"
+        app:itemTextAppearanceActive="@color/teal_200"
+        app:itemTextAppearanceInactive="@color/white"
         app:itemIconTint="@android:color/holo_orange_light"
-        app:itemTextColor="@android:color/black">
+        app:itemHorizontalTranslationEnabled="true"
+        app:itemTextColor="@color/white">
 
     </com.google.android.material.bottomnavigation.BottomNavigationView>
 

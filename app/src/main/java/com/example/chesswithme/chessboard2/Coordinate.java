@@ -9,6 +9,11 @@ public class Coordinate {
         this.y = y;
     }
 
+    public Coordinate(String x, String y) {
+        this.x = Integer.parseInt(x);
+        this.y = Integer.parseInt(y);
+    }
+
     /**
      * Checks if the coordinate is on the board
      *

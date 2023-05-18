@@ -1,14 +1,16 @@
 package com.example.chesswithme.views;
 
+import java.util.Comparator;
+
 public class LeaderboardsItem {
 
     private String position;
     private String username;
-    private String points;
+    private int points;
 
     private int profile_picture_resource;
 
-    public LeaderboardsItem(String position, String username, String points, int profile_picture_resource) {
+    public LeaderboardsItem(String position, String username, int points, int profile_picture_resource) {
         this.position = position;
         this.username = username;
         this.points = points;
@@ -31,11 +33,11 @@ public class LeaderboardsItem {
         this.username = username;
     }
 
-    public String getPoints() {
+    public int getPoints() {
         return points;
     }
 
-    public void setPoints(String points) {
+    public void setPoints(int points) {
         this.points = points;
     }
 
@@ -46,4 +48,13 @@ public class LeaderboardsItem {
     public void setProfile_picture_resource(int profile_picture_resource) {
         this.profile_picture_resource = profile_picture_resource;
     }
+
+    public static class UsersComparator implements Comparator<LeaderboardsItem> {
+
+        @Override
+        public int compare(LeaderboardsItem o1, LeaderboardsItem o2) {
+            return Integer.compare(o2.getPoints(), o1.getPoints());
+        }
+    }
+
 }

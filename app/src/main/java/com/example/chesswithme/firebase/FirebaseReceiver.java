@@ -7,6 +7,7 @@ import android.util.Log;
 import com.example.chesswithme.App;
 import com.example.chesswithme.chessboard2.Board;
 import com.example.chesswithme.chessboard2.BoardView;
+import com.example.chesswithme.chessboard2.Coordinate;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -30,6 +31,7 @@ public class FirebaseReceiver {
     private ArrayList<String> description;
     private ArrayList<String> theory;
     private ArrayList<LessonObject> challenges = new ArrayList<>();
+    ArrayList<ChessUserInfo> users = new ArrayList<>();
 
     public FirebaseReceiver() {
     }
@@ -50,7 +52,7 @@ public class FirebaseReceiver {
                 board.load(theory_initial_position, "white", "theory");
                 BoardView.userColor = Board.userColor;
                 boardView.invalidate();
-                nextTheory();
+                nextTheory(boardView);
             }
 
             @Override
@@ -63,6 +65,26 @@ public class FirebaseReceiver {
         return true;
     }
 
+    public ArrayList<ChessUserInfo> receiveUsersData() {
+        ValueEventListener usersListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
+                    users.add(userSnapshot.getValue(ChessUserInfo.class));
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
+            }
+        };
+        databaseReference.child("Users").addValueEventListener(usersListener);
+        return users;
+    }
+
+
+
     private DatabaseReference getPath(String[] data, int counter, DatabaseReference reference) {
         if(counter == data.length) {
             return reference;
@@ -70,13 +92,23 @@ public class FirebaseReceiver {
         return getPath(data, counter + 1, reference.child(data[counter]));
     }
 
-    public String nextTheory(ArrayList<String> theory) {
+    public String nextTheory(ArrayList<String> theory, BoardView boardView) {
+        if(!theory.get(theory_index).equals(" ")) {
+            String[] split_theory = theory.get(theory_index).split("//");
+            if(!split_theory[1].equals("null")) {
+                String updated_position = split_theory[1];
+                boardView.setSelection(new Coordinate(updated_position.split(",")[0], updated_position.split(",")[1]));//split_theory[2].split(",")[0], split_theory[2].split(",")[1])
+                board.load(updated_position, "white", "theory");
+                boardView.invalidate();
+            }
+        }
         theory_index += 1;
         return theory.get(theory_index - 1);
+
     }
 
-    public String nextTheory() {
-        return nextTheory(theory);
+    public String nextTheory(BoardView boardView) {
+        return nextTheory(theory, boardView);
     }
 
     public String nextChallenge(ArrayList<String> description, int next_desc_index, ArrayList<LessonObject> challenges, int next_position) {

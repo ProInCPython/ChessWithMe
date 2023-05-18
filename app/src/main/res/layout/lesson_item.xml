@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/button"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -8,13 +9,50 @@
     android:backgroundTint="@color/main_background"
     app:cardCornerRadius="10dp">
 
-    <Button
-        android:id="@+id/symbol"
-        style="@style/LessonButtonStyle2"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_gravity="center_vertical"
-        android:layout_marginStart="10dp"
-        android:text="1"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/symbol"
+            android:layout_width="100dp"
+            android:layout_gravity="center_vertical"
+            android:layout_height="100dp"
+            android:background="@drawable/pawn_white"
+            android:elevation="10dp"/>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/description_card"
+            app:cardCornerRadius="20dp"
+            android:layout_width="350dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="20dp"
+            android:backgroundTint="#A8A86F3E">
+
+            <TextView
+                tools:text="Как ходят фигуры: пешка."
+                android:textSize="20sp"
+                android:textAlignment="center"
+                android:layout_gravity="center_vertical"
+                android:textColor="@color/black"
+                android:fontFamily="@font/montserrat_font"
+                android:id="@+id/lesson_name_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:ignore="RtlCompat" />
+
+        </androidx.cardview.widget.CardView>
+
+
+    </RelativeLayout>
+
+<!--    <Button-->
+<!--        android:id="@+id/symbol"-->
+<!--        style="@style/LessonButtonStyle2"-->
+<!--        android:layout_width="100dp"-->
+<!--        android:layout_height="100dp"-->
+<!--        android:layout_gravity="center_vertical"-->
+<!--        android:layout_marginStart="10dp"-->
+<!--        android:text="1"/>-->
 
 </androidx.cardview.widget.CardView>

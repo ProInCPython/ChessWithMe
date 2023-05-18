@@ -2,11 +2,12 @@ package com.example.chesswithme.firebase;
 
 public class ChessUserInfo {
     private String username;
-    private double dailyPoints;
-    private double weeklyPoints;
-    private double monthlyPoints;
-    private double completedLessons;
-    private double profilePicture;
+    private String email;
+    private int dailyPoints;
+    private int weeklyPoints;
+    private int monthlyPoints;
+    private int completedLessons;
+    private int profilePicture;
 
     public ChessUserInfo() {
 
@@ -20,43 +21,51 @@ public class ChessUserInfo {
         this.username = username;
     }
 
-    public double getDailyPoints() {
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public int getDailyPoints() {
         return dailyPoints;
     }
 
-    public void setDailyPoints(double dailyPoints) {
+    public void setDailyPoints(int dailyPoints) {
         this.dailyPoints = dailyPoints;
     }
 
-    public double getWeeklyPoints() {
+    public int getWeeklyPoints() {
         return weeklyPoints;
     }
 
-    public void setWeeklyPoints(double weeklyPoints) {
+    public void setWeeklyPoints(int weeklyPoints) {
         this.weeklyPoints = weeklyPoints;
     }
 
-    public double getMonthlyPoints() {
+    public int getMonthlyPoints() {
         return monthlyPoints;
     }
 
-    public void setMonthlyPoints(double monthlyPoints) {
+    public void setMonthlyPoints(int monthlyPoints) {
         this.monthlyPoints = monthlyPoints;
     }
 
-    public double getCompletedLessons() {
+    public int getCompletedLessons() {
         return completedLessons;
     }
 
-    public void setCompletedLessons(double completedLessons) {
+    public void setCompletedLessons(int completedLessons) {
         this.completedLessons = completedLessons;
     }
 
-    public double getProfilePicture() {
+    public int getProfilePicture() {
         return profilePicture;
     }
 
-    public void setProfilePicture(double profilePicture) {
+    public void setProfilePicture(int profilePicture) {
         this.profilePicture = profilePicture;
     }
 }

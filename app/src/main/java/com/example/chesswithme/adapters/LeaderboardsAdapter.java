@@ -36,8 +36,8 @@ public class LeaderboardsAdapter extends RecyclerView.Adapter<LeaderboardsAdapte
         final LeaderboardsItem state = data.get(position);
         holder.profile_picture.setImageResource(state.getProfile_picture_resource());
         holder.username.setText(state.getUsername());
-        holder.position.setText(state.getPosition());
-        holder.points.setText(state.getPoints());
+        holder.position.setText(Integer.toString(holder.getAdapterPosition() + 1));
+        holder.points.setText(Integer.toString(state.getPoints()));
 //        holder.item.setOnClickListener(view -> {
 //            //go to person's profile
 //        });

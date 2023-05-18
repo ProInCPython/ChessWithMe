@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:id="@+id/menugroup1" >
+        <item
+            android:id="@+id/daily_rating"
+            android:icon="@mipmap/ic_launcher"
+            android:title="Рейтинг за сегодня"/>
+        <item
+            android:id="@+id/weekly_rating"
+            android:title="Рейтинг за эту неделю" />
+        <item
+            android:id="@+id/monthly_rating"
+            android:title="Рейтинг за этот месяц">
+        </item>
+    </group>
+
+</menu>

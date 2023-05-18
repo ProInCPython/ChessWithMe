@@ -6,6 +6,7 @@ import static com.example.chesswithme.chessboard2.Board.firebaseReceiver;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -42,8 +43,12 @@ public class LessonActivity extends AppCompatActivity {
         binding = ActivityLessonBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         board = binding.board;
-        firebaseReceiver.receiveData("AppData/Modules/1/Pawn", board);
+        binding.button.setVisibility(View.GONE);
+        Bundle arguments = getIntent().getExtras();
+        binding.titleText.setText(arguments.getString("simple_lesson_name"));
         binding.text.setText("Приветствую в очередном уроке!");
+        firebaseReceiver.receiveData("AppData/Modules/" + arguments.getString("module") + "/" + arguments.getString("database_lesson_name"), board);
+
 //        binding.button.setAlpha(0);
 //        binding.button2.setAlpha(0);
 //        binding.send.setAlpha(0);
@@ -115,6 +120,7 @@ public class LessonActivity extends AppCompatActivity {
                 if(firebaseReceiver.getTheory().size() == firebaseReceiver.getTheory_index()) {
                     isEndTheory = !isEndTheory;
                     firebaseReceiver.setTheory_index(0);
+                    binding.button.setVisibility(View.VISIBLE);
                     nextChallenge();
                 } else {
                     nextTheory();
@@ -124,7 +130,9 @@ public class LessonActivity extends AppCompatActivity {
 
         binding.button.setOnClickListener(view -> {
             if(firebaseReceiver.isEndLesson) {
-                binding.text.setText("ВЫ ПРОШЛИ УРОК!");
+                binding.text.setText(firebaseReceiver.getDescription().get(firebaseReceiver.getDescription().size() - 1));
+            } else {
+                nextChallenge();
             }
         });
 
@@ -149,7 +157,7 @@ public class LessonActivity extends AppCompatActivity {
     }
 
     private void nextTheory() {
-        String theory_result = firebaseReceiver.nextTheory();
+        String theory_result = firebaseReceiver.nextTheory(board);
         binding.text.setText(theory_result);
     }
 

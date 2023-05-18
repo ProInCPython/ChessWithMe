@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -8,12 +8,33 @@
     android:orientation="vertical"
     android:id="@+id/leaderboards_fragment">
 
+    <androidx.cardview.widget.CardView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:backgroundTint="#A8A86F3E"
+        android:layout_height="100dp">
+
+        <Button
+            android:id="@+id/menu_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:layout_gravity="center_horizontal"
+            android:backgroundTint="#A8A86F3E"
+            tools:text="Рейтинг за сегодня"/>
+
+
+
+    </androidx.cardview.widget.CardView>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
+        android:layout_below="@id/title"
+        android:layout_marginTop="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="10dp"
         android:layout_marginBottom="50dp"
         app:layoutManager="LinearLayoutManager"/>
 
-</LinearLayout>
+</RelativeLayout>

@@ -53,15 +53,13 @@ public class LessonsFragment extends Fragment {
     }
 
     private void setInitialData(){
-        data.add(new LessonItem("1"));
-        data.add(new LessonItem("2"));
-        data.add(new LessonItem("3"));
-        data.add(new LessonItem("4"));
-        data.add(new LessonItem("5"));
-        data.add(new LessonItem("6"));
-        data.add(new LessonItem("7"));
-        data.add(new LessonItem("8"));
-        data.add(new LessonItem("9"));
+        data.add(new LessonItem("1", "1", "Pawn", "Как ходят шахматные фигуры: пешка"));
+        data.add(new LessonItem("2", "1", "King", "Как ходят шахматные фигуры: король"));
+        data.add(new LessonItem("3", "1", "Bishop", "Как ходят шахматные фигуры: слон"));
+        data.add(new LessonItem("4", "1", "Knight", "Как ходят шахматные фигуры: конь"));
+        data.add(new LessonItem("5", "1", "Rook", "Как ходят шахматные фигуры: ладья"));
+        data.add(new LessonItem("6", "1", "Queen", "Как ходят шахматные фигуры: ферзь"));
+        data.add(new LessonItem("7", "1", "Summary", "Как ходят шахматные фигуры: обобщение"));
     }
 
 }

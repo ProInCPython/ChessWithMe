@@ -18,6 +18,10 @@ public class EnterActivity extends AppCompatActivity {
         binding = ActivityEnterBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         AuthController authController = new AuthController();
+        if(authController.isAuth()) {
+            startActivity(new Intent(this, AppActivity.class));
+            finish();
+        }
         binding.startNow.setOnClickListener(view -> {
             if(authController.isAuth()) {
                 startActivity(new Intent(this, LoginActivity.class));

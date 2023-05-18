@@ -183,4 +183,11 @@ public class BoardView extends View {
                 Math.min(getMeasuredWidth(), getMeasuredHeight()));
     }
 
+    public Coordinate getSelection() {
+        return selection;
+    }
+
+    public void setSelection(Coordinate selection) {
+        this.selection = selection;
+    }
 }

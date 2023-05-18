@@ -7,12 +7,18 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.chesswithme.R;
+import com.example.chesswithme.chessboard2.Board;
+import com.example.chesswithme.firebase.ChessUserInfo;
 import com.example.chesswithme.fragments.LeaderboardsFragment;
 import com.example.chesswithme.fragments.LessonsFragment;
 import com.example.chesswithme.fragments.ProfileFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.ArrayList;
+
 public class AppActivity extends AppCompatActivity {
+
+    public static ArrayList<ChessUserInfo> usersList = Board.firebaseReceiver.receiveUsersData();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,21 +39,21 @@ public class AppActivity extends AppCompatActivity {
                     case R.id.lessons:
                         if (savedInstanceState == null) {
                             getSupportFragmentManager().beginTransaction()
-                                    .add(R.id.fragment_container_view, LessonsFragment.class, null)
+                                    .replace(R.id.fragment_container_view, LessonsFragment.class, null)
                                     .commit();
                         }
                         break;
                     case R.id.leaderboards:
                         if (savedInstanceState == null) {
                             getSupportFragmentManager().beginTransaction()
-                                    .add(R.id.fragment_container_view, LeaderboardsFragment.class, null)
+                                    .replace(R.id.fragment_container_view, LeaderboardsFragment.class, null)
                                     .commit();
                         }
                         break;
                     case R.id.profile:
                         if (savedInstanceState == null) {
                             getSupportFragmentManager().beginTransaction()
-                                    .add(R.id.fragment_container_view, ProfileFragment.class, null)
+                                    .replace(R.id.fragment_container_view, ProfileFragment.class, null)
                                     .commit();
                         }
                         break;

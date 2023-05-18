@@ -46,7 +46,7 @@ public class RegisterActivity extends AppCompatActivity {
             if(password.equals(repeat_password)) {
                 controller.registerUser(email, password, task -> {
                     if (task.isSuccessful()) {
-                        addUserDatatoFirebase("1", "ChessPlayer", 0, 0, 0, 0, R.drawable.user);
+                        addUserDatatoFirebase(email, email, 0, 0, 0, 0, R.drawable.user);
                         startActivity(new Intent(this, AppActivity.class));
                         finish();
                     } else {
@@ -104,7 +104,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     }
 
-    private void addUserDatatoFirebase(String userId, String username, double dailyPoints, double weeklyPoints, double monthlyPoints, double completedLessons, double profilePicture) {
+    private void addUserDatatoFirebase(String email, String username, int dailyPoints, int weeklyPoints, int monthlyPoints, int completedLessons, int profilePicture) {
         chessUserInfo = new ChessUserInfo();
         chessUserInfo.setUsername(username);
         chessUserInfo.setDailyPoints(dailyPoints);
@@ -112,11 +112,7 @@ public class RegisterActivity extends AppCompatActivity {
         chessUserInfo.setCompletedLessons(completedLessons);
         chessUserInfo.setMonthlyPoints(monthlyPoints);
         chessUserInfo.setProfilePicture(profilePicture);
-
-        String key = databaseReference.push().getKey();
-
-        databaseReference.child(key).setValue(userId);
-
+        chessUserInfo.setEmail(email);
         databaseReference.push().setValue(chessUserInfo);
 
         // we are use add value event listener method
