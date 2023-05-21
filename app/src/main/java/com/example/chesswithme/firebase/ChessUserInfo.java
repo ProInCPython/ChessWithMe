@@ -3,6 +3,8 @@ package com.example.chesswithme.firebase;
 public class ChessUserInfo {
     private String username;
     private String email;
+    private int top_three_finishes;
+    private int position;
     private int dailyPoints;
     private int weeklyPoints;
     private int monthlyPoints;
@@ -27,6 +29,22 @@ public class ChessUserInfo {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public int getTop_three_finishes() {
+        return top_three_finishes;
+    }
+
+    public void setTop_three_finishes(int top_three_finishes) {
+        this.top_three_finishes = top_three_finishes;
+    }
+
+    public int getPosition() {
+        return position;
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
     }
 
     public int getDailyPoints() {

@@ -19,8 +19,10 @@
         tools:targetApi="33">
 
         <activity
-            android:name=".activities.EnterActivity"
-            android:exported="true">
+            android:name=".activities.SplashScreenActivity"
+            android:exported="true"
+            android:launchMode="singleTask"
+            android:theme="@style/SplashTheme">
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
 
@@ -30,7 +32,7 @@
         </activity>
 
         <activity
-            android:name=".activities.SplashScreenActivity"
+            android:name=".activities.EnterActivity"
             android:exported="false">
         </activity>
 
@@ -48,6 +50,14 @@
         <activity
             android:name=".activities.LessonActivity"
             android:exported="false" />
+
+        <activity
+            android:name=".activities.EndLessonActivity"
+            android:exported="false" />
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
 
     </application>
 

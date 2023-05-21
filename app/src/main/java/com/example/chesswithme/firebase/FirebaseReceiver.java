@@ -2,12 +2,15 @@ package com.example.chesswithme.firebase;
 
 import static android.content.ContentValues.TAG;
 
+import static com.example.chesswithme.activities.RegisterActivity.authController;
+
 import android.util.Log;
 
 import com.example.chesswithme.App;
 import com.example.chesswithme.chessboard2.Board;
 import com.example.chesswithme.chessboard2.BoardView;
 import com.example.chesswithme.chessboard2.Coordinate;
+import com.example.chesswithme.controller.AuthController;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -21,6 +24,10 @@ public class FirebaseReceiver {
     DatabaseReference databaseReference = App.getDatabaseReference();
     String data;
     LessonObject lesson;
+    LessonObject lesson2;
+    LessonObject lesson3;
+    LessonObject lesson4;
+    LessonObject lesson5;
     public boolean isDataReady = false;
     private String theory_initial_position;
     public boolean isEndLesson = false;
@@ -32,6 +39,8 @@ public class FirebaseReceiver {
     private ArrayList<String> theory;
     private ArrayList<LessonObject> challenges = new ArrayList<>();
     ArrayList<ChessUserInfo> users = new ArrayList<>();
+    ChessUserInfo chessUserInfo;
+    DatabaseReference currentUserReference;
 
     public FirebaseReceiver() {
     }
@@ -41,6 +50,10 @@ public class FirebaseReceiver {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 lesson = dataSnapshot.child("1").getValue(LessonObject.class);
+                lesson2 = dataSnapshot.child("2").getValue(LessonObject.class);
+                lesson3 = dataSnapshot.child("3").getValue(LessonObject.class);
+                lesson4 = dataSnapshot.child("4").getValue(LessonObject.class);
+                lesson5 = dataSnapshot.child("5").getValue(LessonObject.class);
                 theory_initial_position = dataSnapshot.child("init_pos_theory").getValue(InitialPosition.class).getValue();
                 GenericTypeIndicator<ArrayList<String>> description_init = new GenericTypeIndicator<ArrayList<String>>() {
                 };
@@ -49,6 +62,10 @@ public class FirebaseReceiver {
                 };
                 theory = dataSnapshot.child("theory").getValue(theory_init);
                 challenges.add(lesson);
+                challenges.add(lesson2);
+                challenges.add(lesson3);
+                challenges.add(lesson4);
+                challenges.add(lesson5);
                 board.load(theory_initial_position, "white", "theory");
                 BoardView.userColor = Board.userColor;
                 boardView.invalidate();
@@ -83,6 +100,27 @@ public class FirebaseReceiver {
         return users;
     }
 
+    public DatabaseReference findUserData() {
+        ValueEventListener findListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
+                    ChessUserInfo user = userSnapshot.getValue(ChessUserInfo.class);
+                    if(user.getEmail().equals(authController.getUser().getEmail())) {
+                        currentUserReference = userSnapshot.getRef();
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
+            }
+        };
+        databaseReference.child("Users").addValueEventListener(findListener);
+        return currentUserReference;
+    }
+
 
 
     private DatabaseReference getPath(String[] data, int counter, DatabaseReference reference) {
@@ -100,11 +138,16 @@ public class FirebaseReceiver {
                 boardView.setSelection(new Coordinate(updated_position.split(",")[0], updated_position.split(",")[1]));//split_theory[2].split(",")[0], split_theory[2].split(",")[1])
                 board.load(updated_position, "white", "theory");
                 boardView.invalidate();
+            } else {
+                theory_index += 1;
+                return split_theory[0];
             }
+            theory_index += 1;
+            return split_theory[0];
+        } else {
+            theory_index += 1;
+            return theory.get(theory_index);
         }
-        theory_index += 1;
-        return theory.get(theory_index - 1);
-
     }
 
     public String nextTheory(BoardView boardView) {
@@ -112,24 +155,36 @@ public class FirebaseReceiver {
     }
 
     public String nextChallenge(ArrayList<String> description, int next_desc_index, ArrayList<LessonObject> challenges, int next_position) {
-        if(challenges.size() == next_position) {
-            isEndLesson = true;
-            return "lessonEnd";
-        } else {
-            LessonObject lesson = challenges.get(next_position);
-            String userColor = lesson.getUserColor();
-            String initial_position = lesson.getInitial_position();
-            finish_conditions = lesson.getFinish_conditions();
-            BoardView.userColor = userColor;
-            board.load(initial_position, userColor, "challenge");
-            description_index += 1;
-            position_index += 1;
-            return description.get(next_desc_index);
-        }
+            if(challenges.size() == next_position) {
+                isEndLesson = true;
+                return "ВЫ ПРОШЛИ УРОК!";
+            } else {
+                String[] split_theory = description.get(next_desc_index).split("//");
+                LessonObject lesson = challenges.get(next_position);
+                String userColor = lesson.getUserColor();
+                String initial_position = lesson.getInitial_position();
+                finish_conditions = lesson.getFinish_conditions();
+                BoardView.userColor = userColor;
+                board.load(initial_position, userColor, "challenge");
+                description_index += 1;
+                position_index += 1;
+                return split_theory[0];
+            }
     }
 
     public String nextChallenge() {
         return nextChallenge(description, description_index, challenges, position_index);
+    }
+
+    public String nextChallenge(boolean isNextChallenge) {
+        if(challenges.size() == position_index) {
+            isEndLesson = true;
+            return "ВЫ ПРОШЛИ УРОК!";
+        } else {
+            String[] split_theory = description.get(description_index).split("//");
+            description_index += 1;
+            return split_theory[0];
+        }
     }
 
     //GETTERS AND SETTERS
@@ -141,10 +196,6 @@ public class FirebaseReceiver {
 
     public void setEndLesson(boolean endLesson) {
         isEndLesson = endLesson;
-    }
-
-    public Board getBoard() {
-        return board;
     }
 
     public String getTheory_initial_position() {

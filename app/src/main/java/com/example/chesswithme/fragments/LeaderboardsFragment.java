@@ -123,19 +123,19 @@ public class LeaderboardsFragment extends Fragment {
         switch (rating_type) { //1 - за сегодня, 2 - за неделю, 3 - за месяц
             case 1:
                 for (ChessUserInfo user : usersList) {
-                    data.add(new LeaderboardsItem ("", user.getUsername(), user.getDailyPoints(), user.getProfilePicture()));
+                    data.add(new LeaderboardsItem (Integer.toString(user.getPosition()), user.getUsername(), user.getDailyPoints(), user.getProfilePicture()));
                 }
                 binding.menuGroup.setText("Рейтинг за сегодня");
                 break;
             case 2:
                 for (ChessUserInfo user : usersList) {
-                    data.add(new LeaderboardsItem ("", user.getUsername(), user.getWeeklyPoints(), user.getProfilePicture()));
+                    data.add(new LeaderboardsItem (Integer.toString(user.getPosition()), user.getUsername(), user.getWeeklyPoints(), user.getProfilePicture()));
                 }
                 binding.menuGroup.setText("Рейтинг за неделю");
                 break;
             case 3:
                 for (ChessUserInfo user : usersList) {
-                    data.add(new LeaderboardsItem ("", user.getUsername(), user.getMonthlyPoints(), user.getProfilePicture()));
+                    data.add(new LeaderboardsItem (Integer.toString(user.getPosition()), user.getUsername(), user.getMonthlyPoints(), user.getProfilePicture()));
                 }
                 binding.menuGroup.setText("Рейтинг за месяц");
                 break;

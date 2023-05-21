@@ -1,5 +1,7 @@
 package com.example.chesswithme.adapters;
 
+import static com.example.chesswithme.activities.AppActivity.current_user_reference;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.chesswithme.R;
+import com.example.chesswithme.firebase.ChessUserInfo;
+import com.example.chesswithme.fragments.ProfileFragment;
 import com.example.chesswithme.views.LeaderboardsItem;
 import com.example.chesswithme.databinding.LeaderboardsItemBinding;
 
@@ -34,9 +38,10 @@ public class LeaderboardsAdapter extends RecyclerView.Adapter<LeaderboardsAdapte
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         final LeaderboardsItem state = data.get(position);
-        holder.profile_picture.setImageResource(state.getProfile_picture_resource());
+        holder.profile_picture.setImageResource(R.drawable.user);
         holder.username.setText(state.getUsername());
-        holder.position.setText(Integer.toString(holder.getAdapterPosition() + 1));
+        state.setPosition(Integer.toString(holder.getAdapterPosition() + 1));
+        holder.position.setText(state.getPosition());
         holder.points.setText(Integer.toString(state.getPoints()));
 //        holder.item.setOnClickListener(view -> {
 //            //go to person's profile

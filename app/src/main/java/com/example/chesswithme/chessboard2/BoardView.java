@@ -57,6 +57,7 @@ public class BoardView extends View {
                         if (!Board.getPiece(selection).sameTeam(c)) {
                             if (board.move(selection, c)) {
                                 selection = null;
+
                                 invalidate();
                             }
                         }

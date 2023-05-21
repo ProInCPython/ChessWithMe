@@ -15,11 +15,12 @@
 
         <ImageView
             android:id="@+id/symbol"
-            android:layout_width="100dp"
-            android:layout_gravity="center_vertical"
-            android:layout_height="100dp"
-            android:background="@drawable/pawn_white"
-            android:elevation="10dp"/>
+            android:layout_width="90dp"
+            android:layout_alignParentStart="true"
+            android:layout_height="90dp"
+            android:elevation="10dp"
+            android:layout_marginTop="5dp"
+            tools:background="@drawable/pawn_white"/>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/description_card"
@@ -30,14 +31,15 @@
             android:backgroundTint="#A8A86F3E">
 
             <TextView
-                tools:text="Как ходят фигуры: пешка."
-                android:textSize="20sp"
+                tools:text="Как ходят фигуры: король."
+                android:textSize="19sp"
+                android:textStyle="bold"
                 android:textAlignment="center"
-                android:layout_gravity="center_vertical"
+                android:layout_gravity="center"
                 android:textColor="@color/black"
                 android:fontFamily="@font/montserrat_font"
                 android:id="@+id/lesson_name_text"
-                android:layout_width="match_parent"
+                android:layout_width="180dp"
                 android:layout_height="wrap_content"
                 tools:ignore="RtlCompat" />
 

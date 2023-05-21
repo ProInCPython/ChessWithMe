@@ -1,40 +1,29 @@
 package com.example.chesswithme.activities;
 
-import static android.content.ContentValues.TAG;
-
 import static com.example.chesswithme.chessboard2.Board.firebaseReceiver;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.chesswithme.App;
-import com.example.chesswithme.chessboard2.Board;
+import com.example.chesswithme.R;
 import com.example.chesswithme.chessboard2.BoardView;
-import com.example.chesswithme.chessboard2.Coordinate;
 import com.example.chesswithme.databinding.ActivityLessonBinding;
 import com.example.chesswithme.firebase.FirebaseReceiver;
-import com.example.chesswithme.firebase.InitialPosition;
-import com.example.chesswithme.firebase.LessonObject;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.GenericTypeIndicator;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class LessonActivity extends AppCompatActivity {
     ActivityLessonBinding binding;
     BoardView board;
     String data;
     private boolean isEndTheory = false;
+    private ArrayList<String> mistake_phrases = new ArrayList<>();
+    private boolean isNextChallenge = false;
 
 
     @Override
@@ -43,6 +32,12 @@ public class LessonActivity extends AppCompatActivity {
         binding = ActivityLessonBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         board = binding.board;
+        binding.mistakeScreen.setVisibility(View.INVISIBLE);
+        mistake_phrases.add("Не думаю, что вы хотели достичь этого...");
+        mistake_phrases.add("У меня такое чувство, что эта позиция не была вашей целью!");
+        mistake_phrases.add("Странно! В базе данных такой позиции нет.");
+        mistake_phrases.add("Подумайте ещё!");
+        mistake_phrases.add("Продолжайте пытаться! Я верю в вас!");
         binding.button.setVisibility(View.GONE);
         Bundle arguments = getIntent().getExtras();
         binding.titleText.setText(arguments.getString("simple_lesson_name"));
@@ -126,13 +121,36 @@ public class LessonActivity extends AppCompatActivity {
                     nextTheory();
                 }
             }
+            if(isNextChallenge) {
+                isNextChallenge = !isNextChallenge;
+                FirebaseReceiver.board.isNextChallenge = !FirebaseReceiver.board.isNextChallenge;
+                nextChallenge();
+            }
+            if(firebaseReceiver.isEndLesson) {
+                startActivity(new Intent(this, EndLessonActivity.class));
+                finish();
+            }
         });
 
         binding.button.setOnClickListener(view -> {
             if(firebaseReceiver.isEndLesson) {
-                binding.text.setText(firebaseReceiver.getDescription().get(firebaseReceiver.getDescription().size() - 1));
+
             } else {
-                nextChallenge();
+                if(FirebaseReceiver.board.isNextChallenge) {
+                    nextChallenge(true);
+                    isNextChallenge = !isNextChallenge;
+                } else {
+                    AlphaAnimation alphaAnimation = new AlphaAnimation(0f, 0.45f);
+                    alphaAnimation.setDuration(500);
+                    alphaAnimation.setFillAfter(false);
+                    binding.mistakeScreen.setVisibility(View.VISIBLE);
+                    binding.mistakeScreen.startAnimation(alphaAnimation);
+                    AlphaAnimation alphaAnimation2 = new AlphaAnimation(0.45f, 0f);
+                    alphaAnimation2.setDuration(500);
+                    alphaAnimation2.setFillAfter(true);
+                    binding.mistakeScreen.setVisibility(View.INVISIBLE);
+                }
+
             }
         });
 
@@ -147,6 +165,7 @@ public class LessonActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         update();
+        finish();
         super.onBackPressed();
     }
 
@@ -154,6 +173,11 @@ public class LessonActivity extends AppCompatActivity {
         String challenge_result = firebaseReceiver.nextChallenge();
         binding.text.setText(challenge_result);
         board.invalidate();
+    }
+
+    public void nextChallenge(boolean isNextChallenge) {
+        String challenge_result = firebaseReceiver.nextChallenge(isNextChallenge);
+        binding.text.setText(challenge_result);
     }
 
     private void nextTheory() {

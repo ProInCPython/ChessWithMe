@@ -22,7 +22,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     ActivityRegisterBinding binding;
     DatabaseReference databaseReference;
-
+    public final static AuthController authController = new AuthController();
     ChessUserInfo chessUserInfo;
 
 
@@ -34,9 +34,6 @@ public class RegisterActivity extends AppCompatActivity {
 
         databaseReference = App.getDatabaseReference().child("Users");
 
-
-        AuthController controller = new AuthController();
-
         binding.button.setOnClickListener(view -> {
 
                 String email = binding.email.getText().toString();
@@ -44,9 +41,9 @@ public class RegisterActivity extends AppCompatActivity {
                 String repeat_password = binding.repeatPassword.getText().toString();
 
             if(password.equals(repeat_password)) {
-                controller.registerUser(email, password, task -> {
+                authController.registerUser(email, password, task -> {
                     if (task.isSuccessful()) {
-                        addUserDatatoFirebase(email, email, 0, 0, 0, 0, R.drawable.user);
+                        addUserDatatoFirebase(email, email, 0, 0, 0, 0, R.drawable.user, 0, 0);
                         startActivity(new Intent(this, AppActivity.class));
                         finish();
                     } else {
@@ -104,7 +101,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     }
 
-    private void addUserDatatoFirebase(String email, String username, int dailyPoints, int weeklyPoints, int monthlyPoints, int completedLessons, int profilePicture) {
+    private void addUserDatatoFirebase(String email, String username, int dailyPoints, int weeklyPoints, int monthlyPoints, int completedLessons, int profilePicture, int position, int top_three_finishes) {
         chessUserInfo = new ChessUserInfo();
         chessUserInfo.setUsername(username);
         chessUserInfo.setDailyPoints(dailyPoints);
@@ -113,6 +110,8 @@ public class RegisterActivity extends AppCompatActivity {
         chessUserInfo.setMonthlyPoints(monthlyPoints);
         chessUserInfo.setProfilePicture(profilePicture);
         chessUserInfo.setEmail(email);
+        chessUserInfo.setTop_three_finishes(top_three_finishes);
+        chessUserInfo.setPosition(position);
         databaseReference.push().setValue(chessUserInfo);
 
         // we are use add value event listener method

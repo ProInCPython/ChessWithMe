@@ -22,6 +22,7 @@ public class Board {
     public static String userColor = "white";
     public boolean isNextChallenge;
     public static String mode;
+    public boolean isPawnPromoted = false;
     public static FirebaseReceiver firebaseReceiver = new FirebaseReceiver();
 
 
@@ -45,10 +46,13 @@ public class Board {
         BOARD[new_pos.x][new_pos.y] = BOARD[old_pos.x][old_pos.y];
         BOARD[old_pos.x][old_pos.y] = null;
         p.position = new_pos;
-        isNextChallenge = isFinishCondition(firebaseReceiver.getFinish_conditions());
-        if(isNextChallenge) {
-            firebaseReceiver.nextChallenge();
+        for (int x = 0; x < 8; x++) {
+            if (BOARD[x][7] != null && BOARD[x][7].getClass().equals(Pawn.class) && BOARD[x][7].getPlayerColor().equals(userColor)) {
+                isPawnPromoted = true;
+                BOARD[x][7] = new Queen(new Coordinate(x, 7), userColor);
+            }
         }
+        isNextChallenge = isFinishCondition(firebaseReceiver.getFinish_conditions());
 //        userColor = userColor.equals("white") ? "black" : "white";
 //        BoardView.userColor = userColor;
 //        flip();
@@ -194,6 +198,16 @@ public class Board {
                     }
                 }
                 return false;
+            case "No opponent pieces":
+                int counter = 0;
+                for (int x = 0; x < 8; x++) {
+                    for(int y = 0; y < 8;y++) {
+                        if (BOARD[x][y] != null && !BOARD[x][y].getPlayerColor().equals(userColor)) {
+                            counter += 1;
+                        }
+                    }
+                }
+                return counter == 0;
             default:
                 return false;
         }

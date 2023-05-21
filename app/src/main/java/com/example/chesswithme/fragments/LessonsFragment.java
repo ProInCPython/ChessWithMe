@@ -27,6 +27,7 @@ import java.util.List;
 public class LessonsFragment extends Fragment {
 
     FragmentLessonsBinding binding;
+    LessonsAdapter adapter;
     private final List<LessonItem> data = new ArrayList<>();
 
     public LessonsFragment() {
@@ -46,20 +47,24 @@ public class LessonsFragment extends Fragment {
         binding = FragmentLessonsBinding.inflate(getLayoutInflater());
         binding.recyclerView.setHasFixedSize(true);
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
-        binding.recyclerView.setAdapter(new LessonsAdapter(data));
+        adapter = new LessonsAdapter(data);
+        binding.recyclerView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
         setInitialData();
-        binding.recyclerView.setAdapter(new LessonsAdapter(data));
+        adapter = new LessonsAdapter(data);
+        binding.recyclerView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
 
     }
 
     private void setInitialData(){
-        data.add(new LessonItem("1", "1", "Pawn", "Как ходят шахматные фигуры: пешка"));
-        data.add(new LessonItem("2", "1", "King", "Как ходят шахматные фигуры: король"));
-        data.add(new LessonItem("3", "1", "Bishop", "Как ходят шахматные фигуры: слон"));
-        data.add(new LessonItem("4", "1", "Knight", "Как ходят шахматные фигуры: конь"));
-        data.add(new LessonItem("5", "1", "Rook", "Как ходят шахматные фигуры: ладья"));
-        data.add(new LessonItem("6", "1", "Queen", "Как ходят шахматные фигуры: ферзь"));
-        data.add(new LessonItem("7", "1", "Summary", "Как ходят шахматные фигуры: обобщение"));
+        data.add(new LessonItem("1", "1", "Pawn", "Как ходят шахматные фигуры: пешка", R.drawable.pawn_white));
+        data.add(new LessonItem("2", "1", "King", "Как ходят шахматные фигуры: король", R.drawable.king_white));
+        data.add(new LessonItem("3", "1", "Bishop", "Как ходят шахматные фигуры: слон", R.drawable.bishop_white));
+        data.add(new LessonItem("4", "1", "Knight", "Как ходят шахматные фигуры: конь", R.drawable.knight_white));
+        data.add(new LessonItem("5", "1", "Rook", "Как ходят шахматные фигуры: ладья", R.drawable.rook_white));
+        data.add(new LessonItem("6", "1", "Queen", "Как ходят шахматные фигуры: ферзь", R.drawable.queen_white));
+        data.add(new LessonItem("7", "1", "Summary", "Как ходят шахматные фигуры: обобщение", R.drawable.book));
     }
 
 }

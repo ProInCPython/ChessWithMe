@@ -17,4 +17,5 @@
     <color name="lesson_button_start_color">#10FFEB</color>
     <color name="lesson_button_end_color">#0005FF</color>
     <color name="hint_color2">#E6E3E2</color>
+    <color name="card_color_lesson">#A8A86F3E</color>
 </resources>

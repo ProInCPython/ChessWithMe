@@ -4,4 +4,8 @@
         <item name="android:background">@drawable/lesson_button_shape</item>
     </style>
 
+    <style name="SplashTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash_bg</item>
+    </style>
+
 </resources>
