@@ -39,11 +39,12 @@ public class RegisterActivity extends AppCompatActivity {
                 String email = binding.email.getText().toString();
                 String password = binding.password.getText().toString();
                 String repeat_password = binding.repeatPassword.getText().toString();
+                String username = binding.username.getText().toString();
 
             if(password.equals(repeat_password)) {
                 authController.registerUser(email, password, task -> {
                     if (task.isSuccessful()) {
-                        addUserDatatoFirebase(email, email, 0, 0, 0, 0, R.drawable.user, 0, 0);
+                        addUserDatatoFirebase(email, username, 0, 0, 0, 0, R.drawable.user, 0, 0, 0, 1, 0);
                         startActivity(new Intent(this, AppActivity.class));
                         finish();
                     } else {
@@ -101,7 +102,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     }
 
-    private void addUserDatatoFirebase(String email, String username, int dailyPoints, int weeklyPoints, int monthlyPoints, int completedLessons, int profilePicture, int position, int top_three_finishes) {
+    private void addUserDatatoFirebase(String email, String username, int dailyPoints, int weeklyPoints, int monthlyPoints, int completedLessons, int profilePicture, int position, int top_three_finishes, int goldenPawns, int level, int alltimePoints) {
         chessUserInfo = new ChessUserInfo();
         chessUserInfo.setUsername(username);
         chessUserInfo.setDailyPoints(dailyPoints);
@@ -112,6 +113,9 @@ public class RegisterActivity extends AppCompatActivity {
         chessUserInfo.setEmail(email);
         chessUserInfo.setTop_three_finishes(top_three_finishes);
         chessUserInfo.setPosition(position);
+        chessUserInfo.setGoldenPawns(goldenPawns);
+        chessUserInfo.setLevel(level);
+        chessUserInfo.setAllTimePoints(alltimePoints);
         databaseReference.push().setValue(chessUserInfo);
 
         // we are use add value event listener method

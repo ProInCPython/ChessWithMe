@@ -20,7 +20,6 @@ import java.util.ArrayList;
 public class AppActivity extends AppCompatActivity {
 
     public static ArrayList<ChessUserInfo> usersList = Board.firebaseReceiver.receiveUsersData();
-    public static DatabaseReference current_user_reference = Board.firebaseReceiver.findUserData();
 
 
     @Override
@@ -64,6 +63,11 @@ public class AppActivity extends AppCompatActivity {
                 return true;
             }
         });
+
+    }
+
+    @Override
+    public void onBackPressed() {
 
     }
 }

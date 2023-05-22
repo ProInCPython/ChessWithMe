@@ -36,8 +36,32 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/email_text"
+            android:id="@+id/username_text"
+            android:layout_width="wrap_content"
             android:layout_alignParentTop="true"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_font"
+            android:text="@string/username_text"
+            android:textColor="@color/white"
+            android:textSize="17sp" />
+
+        <EditText
+            android:id="@+id/username"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/username_text"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/input_field_stroke"
+            android:fontFamily="@font/montserrat_font"
+            android:textSize="17sp"
+            android:inputType="textEmailAddress"
+            android:textColorHint="@color/hint_color2"
+            android:hint="@string/chessproplayer"/>
+
+        <TextView
+            android:layout_below="@id/username"
+            android:id="@+id/email_text"
+            android:layout_marginTop="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat_font"

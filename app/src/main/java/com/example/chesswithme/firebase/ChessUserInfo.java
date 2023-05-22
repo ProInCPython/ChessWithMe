@@ -10,9 +10,11 @@ public class ChessUserInfo {
     private int monthlyPoints;
     private int completedLessons;
     private int profilePicture;
+    private int goldenPawns;
+    private int level;
+    private int allTimePoints;
 
     public ChessUserInfo() {
-
     }
 
     public String getUsername() {
@@ -85,5 +87,29 @@ public class ChessUserInfo {
 
     public void setProfilePicture(int profilePicture) {
         this.profilePicture = profilePicture;
+    }
+
+    public int getGoldenPawns() {
+        return goldenPawns;
+    }
+
+    public void setGoldenPawns(int goldenPawns) {
+        this.goldenPawns = goldenPawns;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    public int getAllTimePoints() {
+        return allTimePoints;
+    }
+
+    public void setAllTimePoints(int allTimePoints) {
+        this.allTimePoints = allTimePoints;
     }
 }

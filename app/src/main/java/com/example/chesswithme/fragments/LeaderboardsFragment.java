@@ -116,7 +116,6 @@ public class LeaderboardsFragment extends Fragment {
     private void setInitialData(int rating_type, int number){
         data.clear();
         if(number != 1) {
-            data.clear();
             adapter = new LeaderboardsAdapter(data);
             binding.recyclerView.setAdapter(adapter);
         }

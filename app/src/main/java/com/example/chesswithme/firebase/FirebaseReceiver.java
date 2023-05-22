@@ -40,7 +40,7 @@ public class FirebaseReceiver {
     private ArrayList<LessonObject> challenges = new ArrayList<>();
     ArrayList<ChessUserInfo> users = new ArrayList<>();
     ChessUserInfo chessUserInfo;
-    DatabaseReference currentUserReference;
+    public DatabaseReference currentUserReference;
 
     public FirebaseReceiver() {
     }
@@ -86,8 +86,14 @@ public class FirebaseReceiver {
         ValueEventListener usersListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                users.clear();
+                int counter = 0;
                 for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
                     users.add(userSnapshot.getValue(ChessUserInfo.class));
+                    if(users.get(counter).getEmail().equals(authController.getUser().getEmail())) {
+                        currentUserReference = userSnapshot.getRef();
+                    }
+                    counter += 1;
                 }
             }
 
@@ -104,10 +110,12 @@ public class FirebaseReceiver {
         ValueEventListener findListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                ChessUserInfo user;
                 for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
-                    ChessUserInfo user = userSnapshot.getValue(ChessUserInfo.class);
+                    user = userSnapshot.getValue(ChessUserInfo.class);
                     if(user.getEmail().equals(authController.getUser().getEmail())) {
                         currentUserReference = userSnapshot.getRef();
+                        break;
                     }
                 }
             }
@@ -179,8 +187,10 @@ public class FirebaseReceiver {
     public String nextChallenge(boolean isNextChallenge) {
         if(challenges.size() == position_index) {
             isEndLesson = true;
+            board.load(Board.getString(), "white", "theory");
             return "ВЫ ПРОШЛИ УРОК!";
         } else {
+            board.load(Board.getString(), "white", "theory");
             String[] split_theory = description.get(description_index).split("//");
             description_index += 1;
             return split_theory[0];

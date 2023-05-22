@@ -1,7 +1,5 @@
 package com.example.chesswithme.adapters;
 
-import static com.example.chesswithme.activities.AppActivity.current_user_reference;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

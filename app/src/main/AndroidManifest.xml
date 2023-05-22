@@ -52,7 +52,7 @@
             android:exported="false" />
 
         <activity
-            android:name=".activities.EndLessonActivity"
+            android:name=".activities.LessonEndActivity"
             android:exported="false" />
 
         <meta-data

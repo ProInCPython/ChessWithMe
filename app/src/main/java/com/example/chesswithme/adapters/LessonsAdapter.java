@@ -9,7 +9,9 @@ import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -46,36 +48,55 @@ public class LessonsAdapter extends RecyclerView.Adapter<LessonsAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         final LessonItem state = data.get(position);
-        if(clicked_items == 1) {
+        holder.completed_lesson_cover.setVisibility(View.INVISIBLE);
+
+        if(position < state.getCompleted_lessons()) {
+            holder.completed_lesson_cover.setVisibility(View.VISIBLE);
+        } else {
+            if(!state.isClicked()) {
+                holder.symbol.setOnClickListener(view -> {
+                    holder.description_card.setVisibility(View.VISIBLE);
+                    TranslateAnimation animation = new TranslateAnimation(-40, 30, 0, 0);
+                    animation.setDuration(1000);
+                    animation.setFillAfter(true);
+                    AlphaAnimation alphaAnimation = new AlphaAnimation(0, 1);
+                    alphaAnimation.setDuration(1500);
+                    alphaAnimation.setFillAfter(true);
+                    holder.description_card.startAnimation(alphaAnimation);
+                    holder.description_card.startAnimation(animation);
+                    holder.description_card.setAlpha(1);
+                    holder.description_card.setBackgroundResource(R.color.card_color_lesson);
+                    if(state.getPreviousClickedPosition() == -1) {
+                        state.setClicked(true);
+                        for (LessonItem item : data) {
+                            item.setPreviousClickedPosition(position);
+                        }
+                    } else {
+                        data.get(state.getPreviousClickedPosition()).setClicked(false);
+                        state.setClicked(true);
+                    }
+                });
+            } else {
+                holder.description_card.setVisibility(View.INVISIBLE);
+                holder.description_card.setAlpha(0);
+            }
+
             holder.description_card.setVisibility(View.INVISIBLE);
+            holder.symbol.setImageResource(state.picture_resource);
+            holder.lesson_name.setText(state.getSimple_lesson_name());
+
+
+
+            holder.description_card.setOnClickListener(view -> {
+                state.setClicked(false);
+                Intent intent = new Intent(view.getContext(), LessonActivity.class);
+                intent.putExtra("simple_lesson_name", state.getSimple_lesson_name());
+                intent.putExtra("module", state.getModule());
+                intent.putExtra("database_lesson_name", state.getLesson_name());
+                holder.description_card.setVisibility(View.INVISIBLE);
+                holder.button.getContext().startActivity(intent);
+            });
         }
-        holder.description_card.setVisibility(View.INVISIBLE);
-        holder.symbol.setImageResource(state.picture_resource);
-        holder.lesson_name.setText(state.getSimple_lesson_name());
-
-        holder.symbol.setOnClickListener(view -> {
-            holder.description_card.setVisibility(View.VISIBLE);
-            TranslateAnimation animation = new TranslateAnimation(-40, 30, 0, 0);
-            animation.setDuration(1000);
-            animation.setFillAfter(true);
-            AlphaAnimation alphaAnimation = new AlphaAnimation(0, 1);
-            alphaAnimation.setDuration(1500);
-            alphaAnimation.setFillAfter(true);
-            holder.description_card.startAnimation(alphaAnimation);
-            holder.description_card.startAnimation(animation);
-            holder.description_card.setAlpha(1);
-            holder.description_card.setBackgroundResource(R.color.card_color_lesson);
-            clicked_items = 1;
-        });
-
-        holder.description_card.setOnClickListener(view -> {
-            Intent intent = new Intent(view.getContext(), LessonActivity.class);
-            intent.putExtra("simple_lesson_name", state.getSimple_lesson_name());
-            intent.putExtra("module", state.getModule());
-            intent.putExtra("database_lesson_name", state.getLesson_name());
-            holder.description_card.setVisibility(View.INVISIBLE);
-            holder.button.getContext().startActivity(intent);
-        });
 
     }
 
@@ -98,6 +119,7 @@ public class LessonsAdapter extends RecyclerView.Adapter<LessonsAdapter.ViewHold
         final ImageView symbol;
         final CardView description_card;
         final TextView lesson_name;
+        final RelativeLayout completed_lesson_cover;
 
         ViewHolder(View view){
             super(view);
@@ -105,6 +127,7 @@ public class LessonsAdapter extends RecyclerView.Adapter<LessonsAdapter.ViewHold
             button = view.findViewById(R.id.button);
             description_card = view.findViewById(R.id.description_card);
             lesson_name = view.findViewById(R.id.lesson_name_text);
+            completed_lesson_cover = view.findViewById(R.id.completed_lesson_cover);
         }
     }
 }

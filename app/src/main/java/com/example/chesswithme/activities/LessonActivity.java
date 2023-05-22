@@ -24,6 +24,10 @@ public class LessonActivity extends AppCompatActivity {
     private boolean isEndTheory = false;
     private ArrayList<String> mistake_phrases = new ArrayList<>();
     private boolean isNextChallenge = false;
+    private int mistakes = 0;
+    private int total_mistakes = 0;
+    private int total_points = 0;
+    private int challenge_points = 0;
 
 
     @Override
@@ -38,7 +42,7 @@ public class LessonActivity extends AppCompatActivity {
         mistake_phrases.add("Странно! В базе данных такой позиции нет.");
         mistake_phrases.add("Подумайте ещё!");
         mistake_phrases.add("Продолжайте пытаться! Я верю в вас!");
-        binding.button.setVisibility(View.GONE);
+        binding.check.setVisibility(View.GONE);
         Bundle arguments = getIntent().getExtras();
         binding.titleText.setText(arguments.getString("simple_lesson_name"));
         binding.text.setText("Приветствую в очередном уроке!");
@@ -115,30 +119,41 @@ public class LessonActivity extends AppCompatActivity {
                 if(firebaseReceiver.getTheory().size() == firebaseReceiver.getTheory_index()) {
                     isEndTheory = !isEndTheory;
                     firebaseReceiver.setTheory_index(0);
-                    binding.button.setVisibility(View.VISIBLE);
+                    binding.check.setVisibility(View.VISIBLE);
+                    mistakes = 0;
+                    total_points = 0;
+                    challenge_points = 3;
                     nextChallenge();
                 } else {
                     nextTheory();
                 }
             }
             if(isNextChallenge) {
+                total_points += challenge_points;
+                total_mistakes += mistakes;
                 isNextChallenge = !isNextChallenge;
                 FirebaseReceiver.board.isNextChallenge = !FirebaseReceiver.board.isNextChallenge;
+                mistakes = 0;
+                challenge_points = 3;
                 nextChallenge();
             }
             if(firebaseReceiver.isEndLesson) {
-                startActivity(new Intent(this, EndLessonActivity.class));
+                firebaseReceiver.isEndLesson = !firebaseReceiver.isEndLesson;
+                Intent intent = new Intent(LessonActivity.this, LessonEndActivity.class);
+                intent.putExtra("mistakes", total_mistakes);
+                intent.putExtra("total_points", total_points);
+                startActivity(intent);
                 finish();
             }
         });
 
-        binding.button.setOnClickListener(view -> {
+        binding.check.setOnClickListener(view -> {
             if(firebaseReceiver.isEndLesson) {
 
             } else {
                 if(FirebaseReceiver.board.isNextChallenge) {
-                    nextChallenge(true);
                     isNextChallenge = !isNextChallenge;
+                    nextChallenge(true);
                 } else {
                     AlphaAnimation alphaAnimation = new AlphaAnimation(0f, 0.45f);
                     alphaAnimation.setDuration(500);
@@ -149,6 +164,11 @@ public class LessonActivity extends AppCompatActivity {
                     alphaAnimation2.setDuration(500);
                     alphaAnimation2.setFillAfter(true);
                     binding.mistakeScreen.setVisibility(View.INVISIBLE);
+                    mistakes += 1;
+                    if(challenge_points != 1) {
+                        challenge_points -= 1;
+                    }
+
                 }
 
             }
@@ -210,3 +230,11 @@ public class LessonActivity extends AppCompatActivity {
 
 
 }
+
+
+
+
+
+
+
+

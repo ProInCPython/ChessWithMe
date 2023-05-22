@@ -13,8 +13,10 @@
     <string name="qwerty1234">QWERTY1234</string>
     <string name="example_mail_ru">example@mail.ru</string>
     <string name="password_text">Пароль</string>
-    <string name="email_text">Email</string>
+    <string name="email_text">Электронная почта</string>
     <string name="no_account">Ещё нет аккаунта? Создайте его!</string>
     <string name="repeat_password_text">Повторите пароль</string>
     <string name="already_have_account">Уже зарегистрированы? Войдите в аккаунт.</string>
+    <string name="username_text">Имя</string>
+    <string name="chessproplayer">ChessProPlayer</string>
 </resources>

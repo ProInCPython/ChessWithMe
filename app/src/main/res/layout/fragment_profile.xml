@@ -27,7 +27,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:text="ChessPro"
-                android:layout_marginStart="100dp"
+                android:layout_marginStart="20dp"
                 android:layout_centerVertical="true"
                 android:fontFamily="@font/montserrat_font"
                 android:textSize="20sp"
@@ -40,7 +40,7 @@
                 android:layout_height="wrap_content"
                 tools:hint="ChessPro"
                 android:textColorHint="@color/white"
-                android:layout_marginStart="100dp"
+                android:layout_marginStart="20dp"
                 android:layout_centerVertical="true"
                 android:fontFamily="@font/montserrat_font"
                 android:textSize="20sp"
@@ -200,7 +200,7 @@
                     android:layout_gravity="center_horizontal">
 
                     <TextView
-                        android:id="@+id/rating_place"
+                        android:id="@+id/level"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
@@ -209,14 +209,14 @@
                         android:textColor="@color/black"/>
 
                     <TextView
-                        android:id="@+id/rating_place_text"
+                        android:id="@+id/level_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
-                        android:text="Место в рейтинге"
+                        android:text="Уровень"
                         android:layout_margin="3dp"
                         android:textSize="15sp"
-                        android:layout_below="@id/rating_place"
+                        android:layout_below="@id/level"
                         android:textColor="@color/black"
                         android:textStyle="bold"/>
 
