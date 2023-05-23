@@ -38,7 +38,7 @@ public class FirebaseReceiver {
     private ArrayList<String> description;
     private ArrayList<String> theory;
     private ArrayList<LessonObject> challenges = new ArrayList<>();
-    ArrayList<ChessUserInfo> users = new ArrayList<>();
+    public ArrayList<ChessUserInfo> users = new ArrayList<>();
     ChessUserInfo chessUserInfo;
     public DatabaseReference currentUserReference;
 

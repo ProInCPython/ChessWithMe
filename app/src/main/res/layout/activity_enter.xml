@@ -29,20 +29,27 @@
 
         <Button
             android:id="@+id/start_now"
-            android:layout_width="192dp"
-            android:layout_height="52dp"
-            android:background="@drawable/button1" />
-
-        <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:elevation="2dp"
+            android:layout_height="52dp"
+            android:background="@drawable/button1"
             android:fontFamily="@font/montserrat_font"
             android:text="@string/start_now"
+            android:textAlignment="center"
+            android:padding="10dp"
             android:textColor="@color/black"
             android:textSize="17sp"
-            android:textStyle="bold" />
+            android:textStyle="bold">
+
+        </Button>
+
+<!--        <TextView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:elevation="2dp"-->
+<!--            android:layout_margin="10dp"-->
+<!--            -->
+<!--            android:fontFamily="@font/montserrat_font"-->
+<!--            />-->
 
     </RelativeLayout>
 

@@ -32,6 +32,7 @@
         android:layout_width="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
+        android:layout_margin="10dp"
         android:layout_marginTop="200dp"
         android:layout_height="wrap_content">
 
@@ -84,17 +85,6 @@
             android:textColorHint="@color/hint_color2"/>
 
         <TextView
-            android:id="@+id/text_forgot_password"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/montserrat_font"
-            android:textSize="13sp"
-            android:text="@string/forgot_password"
-            android:textColor="@color/black"
-            android:layout_below="@id/password"
-            android:layout_marginTop="10dp" />
-
-        <TextView
             android:id="@+id/wrong_password"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -103,12 +93,12 @@
             android:layout_centerHorizontal="true"
             tools:text="Введён неверный email или пароль!"
             android:textColor="@color/hint_color"
-            android:layout_below="@id/text_forgot_password"
+            android:layout_below="@id/password"
             android:layout_marginTop="10dp"/>
 
         <RelativeLayout
             android:id="@+id/button"
-            android:layout_below="@id/text_forgot_password"
+            android:layout_below="@id/password"
             android:layout_marginStart="30dp"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="50dp"

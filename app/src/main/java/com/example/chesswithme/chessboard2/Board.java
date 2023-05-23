@@ -116,6 +116,7 @@ public class Board {
                     BOARD[c.x][c.y] = new Rook(c, pieceData[2]);
                 }
             }
+            flip();
         }
 
     }

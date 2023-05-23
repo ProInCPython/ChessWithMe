@@ -6,13 +6,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.chesswithme.App;
 import com.example.chesswithme.controller.AuthController;
-import com.example.chesswithme.database.User;
-import com.example.chesswithme.database.room.UserDAO;
-import com.example.chesswithme.database.room.UserEntity;
 import com.example.chesswithme.databinding.ActivityLoginBinding;
-import com.example.chesswithme.databinding.ActivityRegisterBinding;
 
 public class LoginActivity extends AppCompatActivity {
 

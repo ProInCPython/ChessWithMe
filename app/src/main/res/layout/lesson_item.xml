@@ -10,17 +10,44 @@
     app:cardCornerRadius="10dp">
 
     <RelativeLayout
-        android:id="@+id/completed_lesson_cover"
+        android:id="@+id/lesson_card_title"
         android:layout_width="match_parent"
-        android:background="@color/completed_lesson_color"
-        android:alpha="0.5"
-        android:elevation="1dp"
-        android:layout_height="match_parent"/>
+        android:background="#0A81B1"
+        android:visibility="invisible"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/title_module"
+            android:layout_width="wrap_content"
+            tools:text="Модуль первый."
+            android:textColor="@color/black"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="10dp"
+            android:layout_centerHorizontal="true"
+            android:textSize="30sp"
+            android:fontFamily="@font/josefin_sans_bold"
+            android:textAllCaps="true"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/description_module"
+            android:layout_below="@id/title_module"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/montserrat_font"
+            tools:text="Как ходят шахматные фигуры."
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:layout_centerHorizontal="true"
+            android:layout_height="wrap_content"/>
 
 
+    </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/lesson_card_real"
         android:layout_width="match_parent"
+        android:visibility="invisible"
         android:layout_height="match_parent">
 
         <ImageView
@@ -55,6 +82,42 @@
 
         </androidx.cardview.widget.CardView>
 
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/completed_lesson_cover"
+        android:layout_width="match_parent"
+        android:background="@color/completed_lesson_color"
+        android:alpha="0.7"
+        android:visibility="invisible"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:alpha="1"
+            android:src="@drawable/complete_lesson_con"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/locked_lesson_cover"
+        android:layout_width="match_parent"
+        android:background="@color/locked_lesson_cover"
+        android:alpha="0.8"
+        android:visibility="invisible"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:alpha="1"
+            android:src="@drawable/lock"/>
 
     </RelativeLayout>
 

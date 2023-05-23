@@ -11,8 +11,9 @@ public class LessonItem {
     private boolean isClicked;
     private int previousClickedPosition;
     private int completed_lessons;
+    private boolean isTitle;
 
-    public LessonItem(String text, String module, String lesson_name, String simple_lesson_name, int picture_resource, boolean isClicked, int previousClickedPosition, int completed_lessons) {
+    public LessonItem(String text, String module, String lesson_name, String simple_lesson_name, int picture_resource, boolean isClicked, int previousClickedPosition, int completed_lessons, boolean isTitle) {
         this.text = text;
         this.module = module;
         this.lesson_name = lesson_name;
@@ -21,6 +22,7 @@ public class LessonItem {
         this.isClicked = isClicked;
         this.previousClickedPosition = previousClickedPosition;
         this.completed_lessons = completed_lessons;
+        this.isTitle = isTitle;
     }
 
     public String getText() {
@@ -85,5 +87,13 @@ public class LessonItem {
 
     public void setCompleted_lessons(int completed_lessons) {
         this.completed_lessons = completed_lessons;
+    }
+
+    public boolean isTitle() {
+        return isTitle;
+    }
+
+    public void setTitle(boolean title) {
+        isTitle = title;
     }
 }

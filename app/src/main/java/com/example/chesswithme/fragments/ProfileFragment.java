@@ -1,26 +1,21 @@
 package com.example.chesswithme.fragments;
 
-import static com.example.chesswithme.activities.AppActivity.usersList;
 import static com.example.chesswithme.activities.RegisterActivity.authController;
+import static com.example.chesswithme.activities.SplashScreenActivity.usersList;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.example.chesswithme.App;
 import com.example.chesswithme.R;
-import com.example.chesswithme.activities.AppActivity;
 import com.example.chesswithme.chessboard2.Board;
 import com.example.chesswithme.databinding.FragmentProfileBinding;
 import com.example.chesswithme.firebase.ChessUserInfo;
-import com.example.chesswithme.views.LeaderboardsItem;
-import com.google.firebase.database.DatabaseReference;
 
 public class ProfileFragment extends Fragment {
 
@@ -60,6 +55,8 @@ public class ProfileFragment extends Fragment {
                 Board.firebaseReceiver.currentUserReference.child("username").setValue(new_username);
                 binding.editUsername.setVisibility(View.INVISIBLE);
                 binding.username.setVisibility(View.VISIBLE);
+                binding.editUsername.setHint(new_username);
+                binding.username.setText(new_username);
                 isChangeUsernameClicked = false;
             } else {
                 binding.username.setVisibility(View.INVISIBLE);

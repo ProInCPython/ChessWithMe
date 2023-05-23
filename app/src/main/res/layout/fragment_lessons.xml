@@ -16,6 +16,22 @@
 
     </androidx.recyclerview.widget.RecyclerView>
 
+<!--    <FrameLayout-->
+<!--        android:id="@+id/progress_bar"-->
+<!--        android:background="@color/white"-->
+<!--        android:alpha="0.4"-->
+<!--        android:visibility="visible"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent">-->
+
+<!--        <ProgressBar-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:progressTint="@color/black"-->
+<!--            android:progress="@integer/material_motion_duration_long_1"-->
+<!--            android:layout_height="match_parent"/>-->
+
+<!--    </FrameLayout>-->
+
 <!--    <com.example.chesswithme.views.LessonButton-->
 <!--        android:id="@+id/lesson_1"-->
 <!--        android:layout_width="wrap_content"-->

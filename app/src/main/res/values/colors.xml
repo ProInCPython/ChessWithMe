@@ -19,4 +19,5 @@
     <color name="hint_color2">#E6E3E2</color>
     <color name="card_color_lesson">#A8A86F3E</color>
     <color name="completed_lesson_color">#FBAC47</color>
+    <color name="locked_lesson_cover">#525755</color>
 </resources>

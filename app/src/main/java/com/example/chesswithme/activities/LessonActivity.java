@@ -184,9 +184,7 @@ public class LessonActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        update();
-        finish();
-        super.onBackPressed();
+
     }
 
     public void nextChallenge() {
