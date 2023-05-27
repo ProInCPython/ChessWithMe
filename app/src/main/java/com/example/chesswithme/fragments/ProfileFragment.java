@@ -1,7 +1,7 @@
 package com.example.chesswithme.fragments;
 
+import static com.example.chesswithme.activities.AppActivity.usersList;
 import static com.example.chesswithme.activities.RegisterActivity.authController;
-import static com.example.chesswithme.activities.SplashScreenActivity.usersList;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,7 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.chesswithme.R;
-import com.example.chesswithme.chessboard2.Board;
+import com.example.chesswithme.chessboard.Board;
 import com.example.chesswithme.databinding.FragmentProfileBinding;
 import com.example.chesswithme.firebase.ChessUserInfo;
 
@@ -87,6 +87,8 @@ public class ProfileFragment extends Fragment {
                 binding.lessonsComplete.setText(String.valueOf(user.getCompletedLessons()));
                 binding.pointsScored.setText(String.valueOf(user.getAllTimePoints()));
                 binding.level.setText(String.valueOf(user.getLevel()));
+                binding.goldenPawns.setText(String.valueOf(user.getGoldenPawns()));
+                binding.position.setText(String.valueOf(user.getPosition()));
                 binding.topThreeFinishes.setText(String.valueOf(user.getTop_three_finishes()));//String.valueOf(user.getTop_three_finishes())
                 binding.profilePictureProfileFragment.setImageResource(user.getProfilePicture());
             }

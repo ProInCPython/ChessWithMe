@@ -1,6 +1,6 @@
-package com.example.chesswithme.chessboard2.pieces;
+package com.example.chesswithme.chessboard.pieces;
 
-import com.example.chesswithme.chessboard2.Coordinate;
+import com.example.chesswithme.chessboard.Coordinate;
 
 import java.util.List;
 

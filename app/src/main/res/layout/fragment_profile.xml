@@ -15,7 +15,7 @@
         app:cardCornerRadius="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/stroke">
+        android:backgroundTint="@color/white">
 
         <RelativeLayout
             android:layout_width="wrap_content"
@@ -79,7 +79,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/profile_info"
         android:layout_marginTop="1dp"
-        android:background="@drawable/stroke">
+        android:backgroundTint="@color/white">
 
         <RelativeLayout
             android:layout_width="wrap_content"
@@ -260,6 +260,90 @@
                         android:layout_margin="3dp"
                         android:textSize="15sp"
                         android:layout_below="@id/top_three_finishes"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"/>
+
+                </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/golden_pawns_card"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rating_place_card"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/stroke"
+                app:cardCornerRadius="20dp"
+                android:backgroundTint="@color/card_color">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_gravity="center_horizontal">
+
+                    <TextView
+                        android:id="@+id/golden_pawns"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        tools:text="5"
+                        android:textSize="20sp"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:id="@+id/golden_pawns_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:text="Золотых пешек"
+                        android:layout_margin="3dp"
+                        android:textSize="15sp"
+                        android:layout_below="@id/golden_pawns"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"/>
+
+                </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/position_card"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/top_three_finishes_card"
+                android:layout_toRightOf="@id/rating_place_card"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/stroke"
+                app:cardCornerRadius="20dp"
+                android:backgroundTint="@color/card_color">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_gravity="center_horizontal">
+
+                    <TextView
+                        android:id="@+id/position"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        tools:text="6"
+                        android:textSize="20sp"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:id="@+id/position_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:text="Текущая позиция"
+                        android:layout_margin="3dp"
+                        android:textSize="15sp"
+                        android:layout_below="@id/position"
                         android:textColor="@color/black"
                         android:textStyle="bold"/>
 

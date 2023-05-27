@@ -1,14 +1,4 @@
-package com.example.chesswithme.chessboard2;
-
-import android.graphics.Color;
-import android.util.Pair;
-
-import com.example.chesswithme.activities.LessonActivity;
-import com.example.chesswithme.fragments.GameFragment;
-import com.google.android.gms.common.api.GoogleApiClient;
-
-import java.util.LinkedList;
-import java.util.List;
+package com.example.chesswithme.chessboard;
 
 public class Game {
 

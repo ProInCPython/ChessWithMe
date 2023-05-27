@@ -14,7 +14,7 @@
         app:itemBackground="@android:color/transparent"
         app:itemActiveIndicatorStyle="@style/ShapeAppearance.Material3.Corner.ExtraLarge"
         app:itemTextAppearanceActive="@color/teal_200"
-        app:itemTextAppearanceInactive="@color/white"
+        app:itemTextAppearanceInactive="@color/main_background"
         app:itemIconTint="@android:color/holo_orange_light"
         app:itemHorizontalTranslationEnabled="true"
         app:itemTextColor="@color/white">

@@ -1,6 +1,6 @@
 package com.example.chesswithme.fragments;
 
-import static com.example.chesswithme.activities.SplashScreenActivity.usersList;
+import static com.example.chesswithme.activities.AppActivity.usersList;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -17,7 +17,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.chesswithme.R;
 import com.example.chesswithme.adapters.LeaderboardsAdapter;
-import com.example.chesswithme.chessboard2.Board;
 import com.example.chesswithme.controller.AuthController;
 import com.example.chesswithme.databinding.FragmentLeaderboardsBinding;
 import com.example.chesswithme.firebase.ChessUserInfo;

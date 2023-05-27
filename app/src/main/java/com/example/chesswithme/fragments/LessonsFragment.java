@@ -1,11 +1,9 @@
 package com.example.chesswithme.fragments;
 
-import static android.content.ContentValues.TAG;
+import static com.example.chesswithme.activities.AppActivity.usersList;
 import static com.example.chesswithme.activities.RegisterActivity.authController;
-import static com.example.chesswithme.activities.SplashScreenActivity.usersList;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,17 +14,11 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.chesswithme.App;
 import com.example.chesswithme.R;
 import com.example.chesswithme.adapters.LessonsAdapter;
-import com.example.chesswithme.chessboard2.Board;
 import com.example.chesswithme.databinding.FragmentLessonsBinding;
 import com.example.chesswithme.firebase.ChessUserInfo;
 import com.example.chesswithme.views.LessonItem;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,5 +1,8 @@
 package com.example.chesswithme.adapters;
 
+import static com.example.chesswithme.activities.AppActivity.usersList;
+import static com.example.chesswithme.activities.RegisterActivity.authController;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.chesswithme.R;
+import com.example.chesswithme.chessboard.Board;
 import com.example.chesswithme.firebase.ChessUserInfo;
 import com.example.chesswithme.fragments.ProfileFragment;
 import com.example.chesswithme.views.LeaderboardsItem;
@@ -41,6 +45,13 @@ public class LeaderboardsAdapter extends RecyclerView.Adapter<LeaderboardsAdapte
         state.setPosition(Integer.toString(holder.getAdapterPosition() + 1));
         holder.position.setText(state.getPosition());
         holder.points.setText(Integer.toString(state.getPoints()));
+        for (ChessUserInfo user : usersList) {
+            if(user.getEmail().equals(authController.getUser().getEmail())) {
+                if(state.getUsername().equals(user.getUsername())) {
+                    Board.firebaseReceiver.currentUserReference.child("position").setValue(Integer.parseInt(holder.position.getText().toString()));
+                }
+            }
+        }
 //        holder.item.setOnClickListener(view -> {
 //            //go to person's profile
 //        });

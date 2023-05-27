@@ -1,16 +1,12 @@
-package com.example.chesswithme.chessboard2;
+package com.example.chesswithme.chessboard;
 
-import android.util.Pair;
-
-import com.example.chesswithme.activities.LessonActivity;
-import com.example.chesswithme.chessboard2.pieces.Bishop;
-import com.example.chesswithme.chessboard2.pieces.King;
-import com.example.chesswithme.chessboard2.pieces.Knight;
-import com.example.chesswithme.chessboard2.pieces.LeftPawn;
-import com.example.chesswithme.chessboard2.pieces.Pawn;
-import com.example.chesswithme.chessboard2.pieces.Piece;
-import com.example.chesswithme.chessboard2.pieces.Queen;
-import com.example.chesswithme.chessboard2.pieces.Rook;
+import com.example.chesswithme.chessboard.pieces.Bishop;
+import com.example.chesswithme.chessboard.pieces.King;
+import com.example.chesswithme.chessboard.pieces.Knight;
+import com.example.chesswithme.chessboard.pieces.Pawn;
+import com.example.chesswithme.chessboard.pieces.Piece;
+import com.example.chesswithme.chessboard.pieces.Queen;
+import com.example.chesswithme.chessboard.pieces.Rook;
 import com.example.chesswithme.firebase.FirebaseReceiver;
 
 public class Board {

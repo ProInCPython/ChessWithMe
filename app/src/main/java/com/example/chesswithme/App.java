@@ -2,15 +2,8 @@ package com.example.chesswithme;
 
 import android.app.Application;
 
-import androidx.room.Room;
-
-import com.example.chesswithme.chessboard2.Board;
-import com.example.chesswithme.database.room.Database;
-import com.example.chesswithme.firebase.ChessUserInfo;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import java.util.ArrayList;
 
 public class App extends Application {
 

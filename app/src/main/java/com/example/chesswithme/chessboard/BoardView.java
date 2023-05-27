@@ -1,4 +1,4 @@
-package com.example.chesswithme.chessboard2;
+package com.example.chesswithme.chessboard;
 
 import static com.example.chesswithme.firebase.FirebaseReceiver.board;
 
@@ -14,15 +14,13 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import com.example.chesswithme.R;
-import com.example.chesswithme.chessboard2.pieces.Bishop;
-import com.example.chesswithme.chessboard2.pieces.King;
-import com.example.chesswithme.chessboard2.pieces.Knight;
-import com.example.chesswithme.chessboard2.pieces.LeftPawn;
-import com.example.chesswithme.chessboard2.pieces.Pawn;
-import com.example.chesswithme.chessboard2.pieces.Piece;
-import com.example.chesswithme.chessboard2.pieces.Queen;
-import com.example.chesswithme.chessboard2.pieces.Rook;
-import com.example.chesswithme.firebase.FirebaseReceiver;
+import com.example.chesswithme.chessboard.pieces.Bishop;
+import com.example.chesswithme.chessboard.pieces.King;
+import com.example.chesswithme.chessboard.pieces.Knight;
+import com.example.chesswithme.chessboard.pieces.Pawn;
+import com.example.chesswithme.chessboard.pieces.Piece;
+import com.example.chesswithme.chessboard.pieces.Queen;
+import com.example.chesswithme.chessboard.pieces.Rook;
 
 import java.util.Objects;
 

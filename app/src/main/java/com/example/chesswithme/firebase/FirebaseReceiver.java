@@ -7,10 +7,9 @@ import static com.example.chesswithme.activities.RegisterActivity.authController
 import android.util.Log;
 
 import com.example.chesswithme.App;
-import com.example.chesswithme.chessboard2.Board;
-import com.example.chesswithme.chessboard2.BoardView;
-import com.example.chesswithme.chessboard2.Coordinate;
-import com.example.chesswithme.controller.AuthController;
+import com.example.chesswithme.chessboard.Board;
+import com.example.chesswithme.chessboard.BoardView;
+import com.example.chesswithme.chessboard.Coordinate;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;

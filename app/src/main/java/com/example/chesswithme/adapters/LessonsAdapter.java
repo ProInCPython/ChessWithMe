@@ -6,10 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
-import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
-import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -20,12 +17,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.chesswithme.R;
 import com.example.chesswithme.activities.LessonActivity;
-import com.example.chesswithme.chessboard2.Board;
 import com.example.chesswithme.databinding.LessonItemBinding;
-import com.example.chesswithme.views.LessonButton;
 import com.example.chesswithme.views.LessonItem;
-
-import org.w3c.dom.Text;
 
 import java.util.List;
 

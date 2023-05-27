@@ -1,6 +1,6 @@
 package com.example.chesswithme.activities;
 
-import static com.example.chesswithme.chessboard2.Board.firebaseReceiver;
+import static com.example.chesswithme.chessboard.Board.firebaseReceiver;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,8 +10,7 @@ import android.view.animation.AlphaAnimation;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.chesswithme.R;
-import com.example.chesswithme.chessboard2.BoardView;
+import com.example.chesswithme.chessboard.BoardView;
 import com.example.chesswithme.databinding.ActivityLessonBinding;
 import com.example.chesswithme.firebase.FirebaseReceiver;
 
@@ -153,6 +152,7 @@ public class LessonActivity extends AppCompatActivity {
             } else {
                 if(FirebaseReceiver.board.isNextChallenge) {
                     isNextChallenge = !isNextChallenge;
+                    FirebaseReceiver.board.isNextChallenge = !FirebaseReceiver.board.isNextChallenge;
                     nextChallenge(true);
                 } else {
                     AlphaAnimation alphaAnimation = new AlphaAnimation(0f, 0.45f);

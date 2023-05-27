@@ -1,4 +1,4 @@
-package com.example.chesswithme.chessboard2;
+package com.example.chesswithme.chessboard;
 
 import android.util.Pair;
 

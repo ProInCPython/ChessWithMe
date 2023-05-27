@@ -40,7 +40,7 @@
         android:layout_width="match_parent"
         android:layout_height="404dp"/>
 
-    <com.example.chesswithme.chessboard2.BoardView
+    <com.example.chesswithme.chessboard.BoardView
         android:layout_margin="5dp"
         android:id="@+id/board"
         android:layout_below="@id/title"

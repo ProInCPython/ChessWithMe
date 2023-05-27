@@ -7,21 +7,17 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.chesswithme.R;
-import com.example.chesswithme.chessboard2.Board;
+import com.example.chesswithme.chessboard.Board;
 import com.example.chesswithme.firebase.ChessUserInfo;
 import com.example.chesswithme.fragments.LeaderboardsFragment;
 import com.example.chesswithme.fragments.LessonsFragment;
 import com.example.chesswithme.fragments.ProfileFragment;
-import com.example.chesswithme.fragments.ProgressFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.firebase.database.DatabaseReference;
 
 import java.util.ArrayList;
 
 public class AppActivity extends AppCompatActivity {
-
-
-
+    public static ArrayList<ChessUserInfo> usersList = Board.firebaseReceiver.receiveUsersData();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

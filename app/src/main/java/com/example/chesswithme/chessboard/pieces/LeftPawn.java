@@ -1,17 +1,15 @@
-package com.example.chesswithme.chessboard2.pieces;
+package com.example.chesswithme.chessboard.pieces;
 
-import com.example.chesswithme.chessboard2.Board;
-import com.example.chesswithme.chessboard2.Coordinate;
+import com.example.chesswithme.chessboard.Board;
+import com.example.chesswithme.chessboard.Coordinate;
 
 import java.util.LinkedList;
 import java.util.List;
 
-public class Pawn extends Piece {
-    public Pawn(final Coordinate p, final String o) {
+public class LeftPawn extends Piece {
+    public LeftPawn(final Coordinate p, final String o) {
         super(p, o);
     }
-
-
 
     @Override
     public List<Coordinate> getPossiblePositions() {
@@ -19,21 +17,21 @@ public class Pawn extends Piece {
         Coordinate c;
         int x = position.x;
         int y = position.y;
-        c = new Coordinate(x, y + 1);
+        c = new Coordinate(x - 1, y);
         if (c.isValid() && Board.getPiece(c) == null) {
             re.add(c);
         }
         // can move two squares at the beginning
         // (only if no other piece stands 1 before us)
-        if (y == 1 && Board.getPiece(c) == null) {
-            c = new Coordinate(x, y + 2);
+        if (x == 10 && Board.getPiece(c) == null) {
+            c = new Coordinate(x - 2, y);
             if (c.isValid() && Board.getPiece(c) == null) {
                 re.add(c);
             }
         }
 
         // check if we can attack another piece
-        c = new Coordinate(x + 1, y + 1);
+        c = new Coordinate(x - 1, y - 1);
         if (c.isValid() && Board.getPiece(c) != null && !sameTeam(c)) {
             re.add(c);
         }

@@ -1,18 +1,15 @@
 package com.example.chesswithme.activities;
 
+import static com.example.chesswithme.activities.AppActivity.usersList;
 import static com.example.chesswithme.activities.RegisterActivity.authController;
-import static com.example.chesswithme.activities.SplashScreenActivity.usersList;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.view.animation.AlphaAnimation;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.chesswithme.R;
-import com.example.chesswithme.chessboard2.Board;
+import com.example.chesswithme.chessboard.Board;
 import com.example.chesswithme.databinding.ActivityEndLessonBinding;
 import com.example.chesswithme.firebase.ChessUserInfo;
 
