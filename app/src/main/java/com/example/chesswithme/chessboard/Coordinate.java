@@ -14,11 +14,6 @@ public class Coordinate {
         this.y = Integer.parseInt(y);
     }
 
-    /**
-     * Checks if the coordinate is on the board
-     *
-     * @return true, if the coordinate is valid
-     */
     public boolean isValid() {
         return (x >= 0 && y >= 0 && x <= 7 && y <= 7);
     }

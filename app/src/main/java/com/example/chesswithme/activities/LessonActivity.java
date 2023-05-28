@@ -21,7 +21,6 @@ public class LessonActivity extends AppCompatActivity {
     BoardView board;
     String data;
     private boolean isEndTheory = false;
-    private ArrayList<String> mistake_phrases = new ArrayList<>();
     private boolean isNextChallenge = false;
     private int mistakes = 0;
     private int total_mistakes = 0;
@@ -36,11 +35,6 @@ public class LessonActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         board = binding.board;
         binding.mistakeScreen.setVisibility(View.INVISIBLE);
-        mistake_phrases.add("Не думаю, что вы хотели достичь этого...");
-        mistake_phrases.add("У меня такое чувство, что эта позиция не была вашей целью!");
-        mistake_phrases.add("Странно! В базе данных такой позиции нет.");
-        mistake_phrases.add("Подумайте ещё!");
-        mistake_phrases.add("Продолжайте пытаться! Я верю в вас!");
         binding.check.setVisibility(View.GONE);
         Bundle arguments = getIntent().getExtras();
         binding.titleText.setText(arguments.getString("simple_lesson_name"));
@@ -205,23 +199,6 @@ public class LessonActivity extends AppCompatActivity {
 
     public BoardView getBoard() {
         return board;
-    }
-
-    public void updateTurn() {
-//        StringBuilder sb = new StringBuilder();
-//        String current = Game.players[Game.turns % Game.players.length].id;
-//        for (Player p : Game.players) {
-//            sb.append("<font color='")
-//                    .append(String.format("#%06X", (0xFFFFFF & Game.getPlayerColor(p.id))))
-//                    .append("'>");
-//            if (p.id.equals(current)) sb.append("-> ");
-//            if (Game.match_mode == Game.MODE_4_PLAYER_TEAMS) {
-//                sb.append(p.name).append(" [").append(p.team).append("]</font><br />");
-//            } else {
-//                sb.append(p.name).append("</font><br />");
-//            }
-//        }
-//        sb.delete(sb.lastIndexOf("<br />"), sb.length());
     }
 
 

@@ -21,14 +21,6 @@ public class Board {
     public boolean isPawnPromoted = false;
     public static FirebaseReceiver firebaseReceiver = new FirebaseReceiver();
 
-
-    /**
-     * Move a piece
-     *
-     * @param old_pos old position of the piece
-     * @param new_pos new position
-     * @return false, if that move is not legal
-     */
     public boolean move(final Coordinate old_pos, final Coordinate new_pos) {
 
         if (!new_pos.isValid()) return false; // not a valid new position
@@ -55,11 +47,6 @@ public class Board {
         return true;
     }
 
-    /**
-     * Loads the game board from the given data
-     *
-     * @param data containing information about the state of the game
-     */
     public void load(final String data, String user, String mode) {
         Board.mode = mode;
         userColor = user;
@@ -117,21 +104,10 @@ public class Board {
 
     }
 
-    /**
-     * Gets a piece from the board
-     *
-     * @param c the coordinate of the piece to get
-     * @return the piece or null, if there is none at the given coordinate
-     */
     public static Piece getPiece(final Coordinate c) {
         return BOARD[c.x][c.y];
     }
 
-    /**
-     * Get a string representation of this board
-     *
-     * @return the board, represented as a string
-     */
     public static String getString() {
         StringBuilder sb = new StringBuilder();
         for (int x = 0; x < 8; x++) {
@@ -145,14 +121,7 @@ public class Board {
         return sb.toString();
     }
 
-    /**
-     * Sets the player at the top or the bottom up
-     *
-     * @param x_begin  x-coordinate of the left-most piece
-     * @param y_pawns  y-coordinate of the rows of pawns
-     * @param y_others y-coordinate of the rows of other pieces
-     * @param owner    player.id who owns these pieces
-     */
+
     private static void setupPlayerTopBottom(int x_begin, int y_pawns, int y_others, final String owner) {
         for (int x = x_begin; x < x_begin + 8; x++) {
             BOARD[x][y_pawns] = new Pawn(new Coordinate(x, y_pawns), owner);
